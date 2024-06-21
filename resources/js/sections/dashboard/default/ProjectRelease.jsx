@@ -2,8 +2,8 @@
 import { Button, Chip, Grid, LinearProgress, List, ListItemButton, ListItemIcon, ListItemText, Stack, Typography } from '@mui/material';
 
 // project-imports
-import MainCard from 'components/MainCard';
-import Dot from 'components/@extended/Dot';
+import MainCard from '../../../Components/MainCard';
+import Dot from '../../../Components/@extended/Dot';
 
 // assets
 import { Add, Link1 } from 'iconsax-react';

@@ -20,3 +20,8 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+
+// Fallback route for handling 404 errors
+Route::fallback(function () {
+    return Inertia::render('Error/404');
+});

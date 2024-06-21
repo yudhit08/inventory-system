@@ -8,9 +8,9 @@ import { AppBar, Box, ClickAwayListener, Paper, Popper, Toolbar } from '@mui/mat
 import Search from './Search';
 import Profile from './Profile';
 import Localization from './Localization';
-import IconButton from 'components/@extended/IconButton';
-import Transitions from 'components/@extended/Transitions';
-import { ThemeMode } from 'config';
+import IconButton from '../../../../Components/@extended/IconButton';
+import Transitions from '../../../../Components/@extended/Transitions';
+import { ThemeMode } from '../../../../config';
 
 // assets
 import { MoreSquare } from 'iconsax-react';

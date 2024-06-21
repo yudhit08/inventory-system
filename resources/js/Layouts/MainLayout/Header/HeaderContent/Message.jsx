@@ -5,19 +5,19 @@ import { useTheme } from '@mui/material/styles';
 import { Box, Drawer, Grid, Stack, Typography } from '@mui/material';
 
 // project-imports
-import MainCard from 'components/MainCard';
-import IconButton from 'components/@extended/IconButton';
-import SimpleBar from 'components/third-party/SimpleBar';
-import MessageCard from 'components/cards/statistics/MessageCard';
-import { ThemeMode } from 'config';
+import MainCard from '../../../../Components/MainCard';
+import IconButton from '../../../../Components/@extended/IconButton';
+import SimpleBar from '../../../../Components/third-party/SimpleBar';
+import MessageCard from '../../../../Components/cards/statistics/MessageCard';
+import { ThemeMode } from '../../../../config';
 
 // assets
 import { Add, NotificationStatus } from 'iconsax-react';
 
-import message1 from 'assets/images/widget/message/message1.svg';
-import message2 from 'assets/images/widget/message/message2.svg';
-import message3 from 'assets/images/widget/message/message3.svg';
-import message4 from 'assets/images/widget/message/message4.svg';
+import message1 from '../../../../assets/images/widget/message/message1.svg';
+import message2 from '../../../../assets/images/widget/message/message2.svg';
+import message3 from '../../../../assets/images/widget/message/message3.svg';
+import message4 from '../../../../assets/images/widget/message/message4.svg';
 
 // ==============================|| HEADER CONTENT - CUSTOMIZATION ||============================== //
 

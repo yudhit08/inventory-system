@@ -23,13 +23,13 @@ import { FormattedMessage } from 'react-intl';
 // project-imports
 import NavItem from './NavItem';
 import NavCollapse from './NavCollapse';
-import SimpleBar from 'components/third-party/SimpleBar';
-import Transitions from 'components/@extended/Transitions';
+import SimpleBar from '../../../../../Components/third-party/SimpleBar';
+import Transitions from '../../../../../Components/@extended/Transitions';
 
-import useConfig from 'hooks/useConfig';
-import { dispatch, useSelector } from 'store';
-import { activeID } from 'store/reducers/menu';
-import { MenuOrientation, ThemeMode } from 'config';
+import useConfig from '../../../../../hooks/useConfig';
+import { dispatch, useSelector } from '../../../../../store';
+import { activeID } from '../../../../../store/reducers/menu';
+import { MenuOrientation, ThemeMode } from '../../../../../config';
 
 // assets
 import { More2 } from 'iconsax-react';

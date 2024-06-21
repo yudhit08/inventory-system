@@ -7,8 +7,8 @@ import { AppBar, Box, Container, useScrollTrigger } from '@mui/material';
 // project-imports
 import Navigation from './DrawerContent/Navigation';
 
-import { HEADER_HEIGHT } from 'config';
-import useConfig from 'hooks/useConfig';
+import { HEADER_HEIGHT } from '../../../config';
+import useConfig from '../../../hooks/useConfig';
 
 // ==============================|| HORIZONTAL MENU LIST ||============================== //
 
@@ -49,7 +49,7 @@ const CustomAppBar = () => {
           justifyContent: 'center',
           borderTop: `1px solid ${theme.palette.divider}`,
           zIndex: 1098,
-          color: theme.palette.secondary.main
+          color: theme.palette.secondary.main,
         }}
       >
         <Container maxWidth={container ? 'xl' : false}>

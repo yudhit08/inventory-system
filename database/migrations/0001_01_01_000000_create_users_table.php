@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id');
             $table->string('name');
-            $table->string('nip')->default('12345');
-            $table->string('nomor_wa')->default('0823');
+            $table->string('nip');
+            $table->string('nomor_wa')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->enum('role', ['admin', 'user', 'pimpinan', 'petugas_layanan'])->default('user');

@@ -8,7 +8,7 @@ import { Divider, Grid, Typography } from '@mui/material';
 import MuiBreadcrumbs from '@mui/material/Breadcrumbs';
 
 // project-imports
-import MainCard from 'components/MainCard';
+import MainCard from '../../Components/MainCard';
 
 // assets
 import { ArrowRight2, Buildings2, Home3 } from 'iconsax-react';

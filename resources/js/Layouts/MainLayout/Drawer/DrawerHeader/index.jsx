@@ -6,11 +6,11 @@ import { useMediaQuery } from '@mui/material';
 
 // project-imports
 import DrawerHeaderStyled from './DrawerHeaderStyled';
-import { MenuOrientation } from 'config';
+import { MenuOrientation } from '../../../../config';
 
-import Logo from 'components/logo';
-import { DRAWER_WIDTH, HEADER_HEIGHT } from 'config';
-import useConfig from 'hooks/useConfig';
+import Logo from '../../../../Components/logo';
+import { DRAWER_WIDTH, HEADER_HEIGHT } from '../../../../config';
+import useConfig from '../../../../hooks/useConfig';
 
 // ==============================|| DRAWER HEADER ||============================== //
 
@@ -33,7 +33,7 @@ const DrawerHeader = ({ open }) => {
         paddingLeft: isHorizontal ? { xs: '24px', lg: '0' } : open ? '24px' : 0
       }}
     >
-      <Logo isIcon={!open} sx={{ width: open ? 'auto' : 52, height: 'auto' }} />
+      <Logo isIcon={!open} sx={{ width: open ? 52 : 52, height: 'auto' }} />
     </DrawerHeaderStyled>
   );
 };

@@ -5,8 +5,8 @@ import { Chip, ListItemButton, Menu, Stack, Typography } from '@mui/material';
 
 // project-imports
 import RepeatCustomerChart from './RepeatCustomerChart';
-import MainCard from 'components/MainCard';
-import IconButton from 'components/@extended/IconButton';
+import MainCard from '../../../Components/MainCard';
+import IconButton from '../../../Components/@extended/IconButton';
 
 // assets
 import { More } from 'iconsax-react';

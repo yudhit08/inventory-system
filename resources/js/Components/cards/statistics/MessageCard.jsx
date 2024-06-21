@@ -2,10 +2,10 @@ import PropTypes from 'prop-types';
 
 // material-ui
 import { Button, CardMedia, Chip, Grid, Stack, Typography } from '@mui/material';
-import Dot from 'components/@extended/Dot';
+import Dot from '../../../Components/@extended/Dot';
 
 // project-imports
-import MainCard from 'components/MainCard';
+import MainCard from '../../../Components/MainCard';
 
 // ==============================|| HEADER - MESSAGE CARD ||============================== //
 

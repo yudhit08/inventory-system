@@ -20,14 +20,14 @@ import {
 } from '@mui/material';
 
 // project-imports
-import MainCard from 'components/MainCard';
-import IconButton from 'components/@extended/IconButton';
-import Transitions from 'components/@extended/Transitions';
-import { ThemeMode } from 'config';
+import MainCard from '../../../../Components/MainCard';
+import IconButton from '../../../../Components/@extended/IconButton';
+import Transitions from '../../../../Components/@extended/Transitions';
+import { ThemeMode } from '../../../../config';
 
 // assets
 import { Gift, MessageText1, Notification, Setting2 } from 'iconsax-react';
-import Avatar from 'components/@extended/Avatar';
+import Avatar from '../../../../Components/@extended/Avatar';
 
 const actionSX = {
   mt: '6px',

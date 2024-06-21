@@ -28,11 +28,11 @@ import MainLayout from "@/Layouts/MainLayout";
 
 // ==============================|| DASHBOARD - DEFAULT ||============================== //
 
-const DashboardDefault = () => {
+const DashboardDefault = ({auth}) => {
     const theme = useTheme();
 
     return (
-        <MainLayout>
+        <MainLayout user={auth.user} >
             <Grid container rowSpacing={4.5} columnSpacing={2.75}>
                 <Grid item xs={12}>
                     <WelcomeBanner />

@@ -11,7 +11,7 @@ import IconButton from '../../../Components/@extended/IconButton';
 // assets
 import { Add, More, Profile } from 'iconsax-react';
 
-const avatarImage = require.context('assets/images/users', true);
+import avatarImage from '../../../assets/images/users/avatar-4.png'
 
 // ===========================|| STATISTICS - ASSIGN USERS ||=========================== //
 
@@ -85,8 +85,8 @@ const AssignUsers = () => {
                 placement="top-end"
                 title={
                   <AvatarGroup max={10}>
-                    <Avatar alt="Agnes Walker" src={avatarImage(`./avatar-4.png`)} />
-                    <Avatar alt="Trevor Henderson" src={avatarImage(`./avatar-5.png`)} />
+                    <Avatar alt="Agnes Walker" src={avatarImage} />
+                    <Avatar alt="Trevor Henderson" src={avatarImage} />
                   </AvatarGroup>
                 }
               >
@@ -115,11 +115,11 @@ const AssignUsers = () => {
                     }
                   }}
                 >
-                  <Avatar alt="Remy Sharp" src={avatarImage(`./avatar-1.png`)} />
-                  <Avatar alt="Travis Howard" src={avatarImage(`./avatar-2.png`)} />
-                  <Avatar alt="Cindy Baker" src={avatarImage(`./avatar-3.png`)} />
-                  <Avatar alt="Agnes Walker" src={avatarImage(`./avatar-4.png`)} />
-                  <Avatar alt="Trevor Henderson" src={avatarImage(`./avatar-5.png`)} />
+                  <Avatar alt="Remy Sharp" src={avatarImage} />
+                  <Avatar alt="Travis Howard" src={avatarImage} />
+                  <Avatar alt="Cindy Baker" src={avatarImage} />
+                  <Avatar alt="Agnes Walker" src={avatarImage} />
+                  <Avatar alt="Trevor Henderson" src={avatarImage} />
                 </AvatarGroup>
               </Tooltip>
             </Box>

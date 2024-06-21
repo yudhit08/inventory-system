@@ -5,11 +5,11 @@ import { useTheme } from '@mui/material/styles';
 import { Box, ClickAwayListener, Grid, List, ListItemButton, ListItemText, Paper, Popper, Typography, useMediaQuery } from '@mui/material';
 
 // project-imports
-import MainCard from 'components/MainCard';
-import IconButton from 'components/@extended/IconButton';
-import Transitions from 'components/@extended/Transitions';
-import useConfig from 'hooks/useConfig';
-import { ThemeMode } from 'config';
+import MainCard from '../../../../Components/MainCard';
+import IconButton from '../../../../Components/@extended/IconButton';
+import Transitions from '../../../../Components/@extended/Transitions';
+import useConfig from '../../../../hooks/useConfig';
+import { ThemeMode } from '../../../../config';
 
 // assets
 import { LanguageSquare } from 'iconsax-react';

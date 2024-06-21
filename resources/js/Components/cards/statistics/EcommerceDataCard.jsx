@@ -5,9 +5,9 @@ import { useState } from 'react';
 import { Box, Grid, ListItemButton, Menu, Stack, Typography } from '@mui/material';
 
 // project-imports
-import MainCard from 'components/MainCard';
-import Avatar from 'components/@extended/Avatar';
-import IconButton from 'components/@extended/IconButton';
+import MainCard from '../../../Components/MainCard';
+import Avatar from '../../../Components/@extended/Avatar';
+import IconButton from '../../../Components/@extended/IconButton';
 
 // assets
 import { More } from 'iconsax-react';

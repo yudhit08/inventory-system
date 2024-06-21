@@ -2,10 +2,19 @@ import "./bootstrap";
 import "../css/app.css";
 
 import { createRoot } from "react-dom/client";
+
+import { Provider as ReduxProvider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 import { createInertiaApp } from "@inertiajs/react";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
+import { BrowserRouter } from "react-router-dom";
+
 import { JWTProvider as AuthProvider } from "./contexts/JWTContext";
 import ThemeCustomization from "./themes";
+import { store, persister } from "./store";
+import { ConfigProvider } from "./contexts/ConfigContext";
+import Locales from "./Components/Locales";
+
 const appName = import.meta.env.VITE_APP_NAME || "Laravel";
 
 createInertiaApp({
@@ -19,11 +28,21 @@ createInertiaApp({
         const root = createRoot(el);
 
         root.render(
-            <ThemeCustomization>
-                <AuthProvider>
-                    <App {...props} />
-                </AuthProvider>
-            </ThemeCustomization>
+            <ReduxProvider store={store}>
+                <PersistGate loading={null} persistor={persister}>
+                    <ConfigProvider>
+                        <BrowserRouter>
+                            <ThemeCustomization>
+                                <Locales>
+                                    <AuthProvider>
+                                        <App {...props} />
+                                    </AuthProvider>
+                                </Locales>
+                            </ThemeCustomization>
+                        </BrowserRouter>
+                    </ConfigProvider>
+                </PersistGate>
+            </ReduxProvider>
         );
     },
     progress: {
