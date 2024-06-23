@@ -25,6 +25,7 @@ import AnimateButton from "../../../Components/@extended/AnimateButton";
 
 // assets
 import { Eye, EyeSlash } from "iconsax-react";
+import axios from "axios";
 
 // ============================|| JWT - LOGIN ||============================ //
 
@@ -56,18 +57,15 @@ const AuthLogin = ({ forgot }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post("login", {
-            onSuccess: () => {
-                if (scriptedRef.current) {
-                    // Handle successful login
-                }
-            },
-            onError: () => {
-                if (scriptedRef.current) {
-                    // Handle errors
-                }
-            },
-        });
+        axios
+            .post(route("login"), data)
+            .then((page) => {
+                const { user } = page.data;
+                login({ user });
+            })
+            .catch((err) => {
+                console.error(err);
+            });
     };
 
     return (

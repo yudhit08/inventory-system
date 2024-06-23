@@ -73,6 +73,7 @@ const ProfilePage = () => {
     const { post } = useForm();
 
     const { logout, user } = useAuth();
+
     const handleLogout = async () => {
         try {
             post(route("logout"));

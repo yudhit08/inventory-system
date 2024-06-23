@@ -11,13 +11,18 @@ import {
 
 // assets
 import { Card, Edit2, Logout, Profile, Profile2User } from "iconsax-react";
+import { router } from "@inertiajs/react";
 
 // ==============================|| HEADER PROFILE - PROFILE TAB ||============================== //
 
 const ProfileTab = ({ handleLogout }) => {
-    const [selectedIndex, setSelectedIndex] = useState(0);
+    const [selectedIndex, setSelectedIndex] = useState(-1);
     const handleListItemClick = (event, index) => {
         setSelectedIndex(index);
+        console.log(index)
+        if (index === 0) {
+            router.get("/profiles/user/personal")
+        }
     };
 
     return (
@@ -45,7 +50,7 @@ const ProfileTab = ({ handleLogout }) => {
             </ListItemButton>
 
             <ListItemButton
-                selected={selectedIndex === 3}
+                selected={selectedIndex === 2}
                 onClick={(event) => handleListItemClick(event, 3)}
             >
                 <ListItemIcon>
@@ -54,16 +59,7 @@ const ProfileTab = ({ handleLogout }) => {
                 <ListItemText primary="Social Profile" />
             </ListItemButton>
             <ListItemButton
-                selected={selectedIndex === 4}
-                onClick={(event) => handleListItemClick(event, 4)}
-            >
-                <ListItemIcon>
-                    <Card variant="Bulk" size={18} />
-                </ListItemIcon>
-                <ListItemText primary="Billing" />
-            </ListItemButton>
-            <ListItemButton
-                selected={selectedIndex === 2}
+                selected={selectedIndex === 3}
                 onClick={handleLogout}
             >
                 <ListItemIcon>

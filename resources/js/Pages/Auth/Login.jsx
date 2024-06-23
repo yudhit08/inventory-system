@@ -21,6 +21,7 @@ const Login = () => {
 
     return (
         <AuthWrapper>
+            <Head title="Login" />
             <Grid container spacing={3}>
                 <Grid item xs={12} sx={{ textAlign: "center" }}>
                     <Logo sx={{width: "100px"}} />
@@ -54,7 +55,7 @@ const Login = () => {
                         <Typography variant="h3">Login</Typography>
                         <Link
                             component={Link}
-                            href={isLoggedIn ? "/dashboard" : "/register"}
+                            href={"/register"}
                             variant="body1"
                             style={{ textDecoration: "none", color: "#f27013" }}
                             color="primary"

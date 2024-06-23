@@ -1,4 +1,4 @@
-import { Link } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 
 // material-ui
 import { Grid, Stack, Typography } from "@mui/material";
@@ -21,6 +21,7 @@ const Register = () => {
 
     return (
         <AuthWrapper>
+            <Head title="Register" />
             <Grid container spacing={3}>
                 <Grid item xs={12} sx={{ textAlign: "center" }}>
                     <Logo sx={{width: "100px"}} />
@@ -54,7 +55,7 @@ const Register = () => {
                         <Typography variant="h3">Sign up</Typography>
                         <Link
                             component={Link}
-                            href={isLoggedIn ? "/dashboard" : "/login"}
+                            href={"/login"}
                             variant="body1"
                             style={{ textDecoration: "none", color: '#f27013' }}
                             color="primary"

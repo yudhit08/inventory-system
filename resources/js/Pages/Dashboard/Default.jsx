@@ -25,14 +25,24 @@ import {
 } from "iconsax-react";
 import WelcomeBanner from "../../sections/dashboard/default/WelcomeBanner";
 import MainLayout from "@/Layouts/MainLayout";
+import { Head } from "@inertiajs/react";
+import { useEffect } from "react";
+import useAuth from "@/hooks/useAuth";
 
 // ==============================|| DASHBOARD - DEFAULT ||============================== //
 
-const DashboardDefault = ({auth}) => {
+const DashboardDefault = ({ auth }) => {
     const theme = useTheme();
 
+    const { isAuth } = useAuth();
+
+    useEffect(() => {
+        isAuth(auth?.user)
+    }, [])
+
     return (
-        <MainLayout user={auth.user} >
+        <MainLayout user={auth.user}>
+            <Head title="Dashboard" />
             <Grid container rowSpacing={4.5} columnSpacing={2.75}>
                 <Grid item xs={12}>
                     <WelcomeBanner />

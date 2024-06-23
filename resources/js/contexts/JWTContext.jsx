@@ -12,6 +12,8 @@ import authReducer from "../store/reducers/auth";
 // project-imports
 import Loader from "../Components/Loader";
 import axios from "../utils/axios";
+import { router } from "@inertiajs/react";
+import Cookies from "js-cookie";
 
 const chance = new Chance();
 
@@ -54,7 +56,7 @@ export const JWTProvider = ({ children }) => {
     useEffect(() => {
         const init = async () => {
             try {
-                const serviceToken = localStorage.getItem("serviceToken");
+                const serviceToken = localStorage.getItem("sitery_session");
                 if (serviceToken && verifyToken(serviceToken)) {
                     setSession(serviceToken);
                     const response = await axios.get("/api/account/me");
@@ -83,14 +85,7 @@ export const JWTProvider = ({ children }) => {
         init();
     }, []);
 
-    const login = async (email, password) => {
-        const response = await axios.post("/login", {
-            email,
-            password,
-        });
-        const { serviceToken, user } = response.data;
-        console.log(response)
-        setSession(serviceToken);
+    const isAuth = async (user) => {
         dispatch({
             type: LOGIN,
             payload: {
@@ -98,6 +93,17 @@ export const JWTProvider = ({ children }) => {
                 user,
             },
         });
+    };
+
+    const login = async (user) => {
+        dispatch({
+            type: LOGIN,
+            payload: {
+                isLoggedIn: true,
+                user,
+            },
+        });
+        router.get("/dashboard")
     };
 
     const register = async (email, password, firstName, lastName, nip) => {
@@ -150,6 +156,7 @@ export const JWTProvider = ({ children }) => {
         <JWTContext.Provider
             value={{
                 ...state,
+                isAuth,
                 login,
                 logout,
                 register,

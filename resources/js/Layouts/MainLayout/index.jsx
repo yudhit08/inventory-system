@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -21,7 +20,7 @@ import { MenuOrientation } from '../../config';
 
 // ==============================|| MAIN LAYOUT ||============================== //
 
-const MainLayout = ({user}) => {
+const MainLayout = ({children}) => {
   const theme = useTheme();
   const downXL = useMediaQuery(theme.breakpoints.down('xl'));
   const downLG = useMediaQuery(theme.breakpoints.down('lg'));
@@ -57,7 +56,7 @@ const MainLayout = ({user}) => {
           }}
         >
           <Breadcrumbs navigation={navigation} title titleBottom card={false} divider={false} />
-          <Outlet />
+          {children}
           <Footer />
         </Container>
       </Box>

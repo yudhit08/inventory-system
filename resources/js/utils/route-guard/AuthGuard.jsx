@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 // project-imports
 import useAuth from 'hooks/useAuth';
+import { router } from '@inertiajs/react';
 
 // ==============================|| AUTH GUARD ||============================== //
 
@@ -14,12 +15,7 @@ const AuthGuard = ({ children }) => {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      navigate('login', {
-        state: {
-          from: location.pathname
-        },
-        replace: true
-      });
+      router.get('login');
     }
   }, [isLoggedIn, navigate, location]);
 

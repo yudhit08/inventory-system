@@ -14,10 +14,10 @@ const menuItems = {
         dashboard,
         widget,
         applications,
-        formsTables,
-        chartsMap,
-        pages,
-        support,
+        // formsTables,
+        // chartsMap,
+        // pages,
+        // support,
     ],
 };
 

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { useMediaQuery } from '@mui/material';
+import { Typography, useMediaQuery } from '@mui/material';
 
 // project-imports
 import DrawerHeaderStyled from './DrawerHeaderStyled';
@@ -30,10 +30,10 @@ const DrawerHeader = ({ open }) => {
         width: isHorizontal ? { xs: '100%', lg: DRAWER_WIDTH + 50 } : 'inherit',
         paddingTop: isHorizontal ? { xs: '10px', lg: '0' } : '8px',
         paddingBottom: isHorizontal ? { xs: '18px', lg: '0' } : '8px',
-        paddingLeft: isHorizontal ? { xs: '24px', lg: '0' } : open ? '24px' : 0
+        paddingLeft: isHorizontal ? { xs: '24px', lg: '24px' } : open ? '24px' : 0
       }}
     >
-      <Logo isIcon={!open} sx={{ width: open ? 52 : 52, height: 'auto' }} />
+      <Logo isIcon={!open} sx={{ width: open ? 52 : 52, height: 'auto', paddingLeft: open && 5 }} />
     </DrawerHeaderStyled>
   );
 };
