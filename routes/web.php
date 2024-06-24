@@ -11,6 +11,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard/Default');
     })->name('dashboard');
+
+    Route::get('/riwayat-pengaduan', function () {
+        return Inertia::render('RiwayatPengaduan');
+    })->name('riwayat-pengaduan');
 });
 
 Route::middleware('auth')->group(function () {

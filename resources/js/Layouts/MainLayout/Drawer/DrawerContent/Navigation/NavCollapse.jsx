@@ -80,6 +80,7 @@ const NavCollapse = ({
     const handleClick = (event) => {
         setAnchorEl(null);
         setSelectedLevel(level);
+        console.log(menu.id)
         if (drawerOpen) {
             setOpen(!open);
             setSelected(!selected ? menu.id : null);

@@ -57,7 +57,7 @@ const MainLayout = ({children}) => {
         >
           <Breadcrumbs navigation={navigation} title titleBottom card={false} divider={false} />
           {children}
-          <Footer />
+          {/* <Footer /> */}
         </Container>
       </Box>
     </Box>

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from '@inertiajs/react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -30,7 +30,6 @@ const Breadcrumbs = ({
   ...others
 }) => {
   const theme = useTheme();
-  const location = useLocation();
   const [main, setMain] = useState();
   const [item, setItem] = useState();
 
@@ -42,6 +41,21 @@ const Breadcrumbs = ({
     color: theme.palette.secondary.main
   };
 
+  const [pathname, setPathname] = useState(window.location.pathname);
+
+  // Listen for Inertia.js navigation events
+  useEffect(() => {
+    const updatePathname = () => setPathname(window.location.pathname);
+
+    window.addEventListener('popstate', updatePathname);
+    document.addEventListener('inertiavisit', updatePathname);
+
+    return () => {
+      window.removeEventListener('popstate', updatePathname);
+      document.removeEventListener('inertiavisit', updatePathname);
+    };
+  }, []);
+
   useEffect(() => {
     navigation?.items?.map((menu) => {
       if (menu.type && menu.type === 'group') {
@@ -49,24 +63,7 @@ const Breadcrumbs = ({
       }
       return false;
     });
-  });
-
-  let customLocation = location.pathname;
-
-  // only used for component demo breadcrumbs
-  if (customLocation.includes('/components-overview/breadcrumbs')) {
-    customLocation = '/apps/kanban/board';
-  }
-
-  if (customLocation.includes('/apps/kanban/backlogs')) {
-    customLocation = '/apps/kanban/board';
-  }
-
-  useEffect(() => {
-    if (customLocation.includes('/apps/profiles/user/payment')) {
-      setItem(undefined);
-    }
-  }, [item, customLocation]);
+  }, [pathname, navigation]);
 
   // set active item state
   const getCollapse = (menu) => {
@@ -74,12 +71,12 @@ const Breadcrumbs = ({
       menu.children.filter((collapse) => {
         if (collapse.type && collapse.type === 'collapse') {
           getCollapse(collapse);
-          if (collapse.url === customLocation) {
+          if (collapse.url === pathname) {
             setMain(collapse);
             setItem(collapse);
           }
         } else if (collapse.type && collapse.type === 'item') {
-          if (customLocation === collapse.url) {
+          if (pathname === collapse.url) {
             setMain(menu);
             setItem(collapse);
           }
@@ -106,7 +103,7 @@ const Breadcrumbs = ({
     mainContent = (
       <Typography
         component={Link}
-        to={document.location.pathname}
+        href={document.location.pathname}
         variant="h6"
         sx={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}
         color="secondary"
@@ -134,7 +131,7 @@ const Breadcrumbs = ({
             <MuiBreadcrumbs aria-label="breadcrumb" maxItems={maxItems || 8} separator={separatorIcon}>
               <Typography
                 component={Link}
-                to="/"
+                href="/"
                 variant="h6"
                 sx={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}
                 color="textPrimary"
@@ -199,7 +196,7 @@ const Breadcrumbs = ({
               <MuiBreadcrumbs aria-label="breadcrumb" maxItems={maxItems || 8} separator={separatorIcon}>
                 <Typography
                   component={Link}
-                  to="/"
+                  href="/"
                   color="textPrimary"
                   variant="h6"
                   sx={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}

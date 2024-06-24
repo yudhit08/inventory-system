@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "@inertiajs/react";
-import { useLocation } from "react-router-dom";
 
 // material-ui
 import { useTheme } from "@mui/material/styles";
@@ -45,18 +44,26 @@ const NavItem = ({ item, level }) => {
         false
     );
 
-    const { pathname } = useLocation();
+    const [pathname, setPathname] = useState(window.location.pathname);
+
+    // Listen for Inertia.js navigation events
+    useEffect(() => {
+        const updatePathname = () => setPathname(window.location.pathname);
+
+        window.addEventListener('popstate', updatePathname);
+        document.addEventListener('inertiavisit', updatePathname);
+
+        return () => {
+            window.removeEventListener('popstate', updatePathname);
+            document.removeEventListener('inertiavisit', updatePathname);
+        };
+    }, []);
 
     // active menu item on page load
     useEffect(() => {
+        console.log(item.url)
         if (pathname && pathname.includes("product-details")) {
             if (item.url && item.url.includes("product-details")) {
-                dispatch(activeItem({ openItem: [item.id] }));
-            }
-        }
-
-        if (pathname && pathname.includes("kanban")) {
-            if (item.url && item.url.includes("kanban")) {
                 dispatch(activeItem({ openItem: [item.id] }));
             }
         }
@@ -78,7 +85,7 @@ const NavItem = ({ item, level }) => {
             {menuOrientation === MenuOrientation.VERTICAL || downLG ? (
                 <ListItemButton
                     component={Link}
-                    to={item.url}
+                    href={item.url}
                     target={itemTarget}
                     disabled={item.disabled}
                     selected={isSelected}
@@ -135,6 +142,7 @@ const NavItem = ({ item, level }) => {
                 >
                     {itemIcon && (
                         <ListItemIcon
+                        
                             sx={{
                                 minWidth: 38,
                                 color: isSelected
@@ -224,7 +232,7 @@ const NavItem = ({ item, level }) => {
             ) : (
                 <ListItemButton
                     component={Link}
-                    to={item.url}
+                    href={item.url}
                     target={itemTarget}
                     disabled={item.disabled}
                     selected={isSelected}
