@@ -24,10 +24,10 @@ import * as Yup from "yup";
 import { Formik } from "formik";
 
 // project-imports
-import MainCard from "../../Components/MainCard";
-import countries from "../../data/countries";
-import { dispatch } from "../../store";
-import { openSnackbar } from "../../store/reducers/snackbar";
+import MainCard from "@/Components/MainCard";
+import countries from "@/data/countries";
+import { dispatch } from "@/store";
+import { openSnackbar } from "@/store/reducers/snackbar";
 
 // assets
 import { Add } from "iconsax-react";

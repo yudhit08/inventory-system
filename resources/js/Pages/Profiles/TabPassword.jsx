@@ -18,17 +18,17 @@ import {
 } from "@mui/material";
 
 // project-imports
-import MainCard from "../../Components/MainCard";
-import IconButton from "../../Components/@extended/IconButton";
-import { dispatch } from "../../store";
-import { openSnackbar } from "../../store/reducers/snackbar";
+import MainCard from "@/Components/MainCard";
+import IconButton from "@/Components/@extended/IconButton";
+import { dispatch } from "@/store";
+import { openSnackbar } from "@/store/reducers/snackbar";
 import {
     isNumber,
     isLowercaseChar,
     isUppercaseChar,
     isSpecialChar,
     minLength,
-} from "../../utils/password-validation";
+} from "@/utils/password-validation";
 
 // third-party
 import * as Yup from "yup";

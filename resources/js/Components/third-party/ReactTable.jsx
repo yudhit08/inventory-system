@@ -31,7 +31,7 @@ import { useDrop, useDrag, useDragLayer } from 'react-dnd';
 import { ArrowDown2, ArrowUp2, DocumentDownload, HambergerMenu, Maximize1 } from 'iconsax-react';
 
 // project import
-import { ThemeMode } from 'config';
+import { ThemeMode } from '../../config';
 
 // ==============================|| SORT HEADER ||============================== //
 

@@ -4,15 +4,15 @@ import { useMemo, useState } from 'react';
 // material-ui
 import { FormControl, MenuItem, OutlinedInput, Select, Slider, Stack, TextField, Tooltip } from '@mui/material';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 
 // third-party
 import { useAsyncDebounce } from 'react-table';
 import { matchSorter } from 'match-sorter';
-import { format } from 'date-fns';
+import moment from 'moment';
 
 // project-imports
-import IconButton from 'components/@extended/IconButton';
+import IconButton from '@/Components/@extended/IconButton';
 
 // assets
 import { Add, Minus, SearchNormal1 } from 'iconsax-react';
@@ -71,14 +71,14 @@ DefaultColumnFilter.propTypes = {
 export function DateColumnFilter({ column: { filterValue, Header, setFilter } }) {
   return (
     <FormControl sx={{ width: '100%' }}>
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <LocalizationProvider dateAdapter={AdapterMoment}>
         <DatePicker
-          format="dd/MM/yyyy"
+          format="DD/MM/YYYY"
           value={filterValue && new Date(filterValue)}
           onChange={(newValue) => {
             let formatDateFn = undefined;
             try {
-              formatDateFn = format(newValue, 'M/d/yyyy');
+              formatDateFn = moment(newValue).format('DD/MM/YYYY');
             } catch (error) {
               console.log(error);
             }

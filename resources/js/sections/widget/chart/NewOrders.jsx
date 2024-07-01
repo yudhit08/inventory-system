@@ -6,7 +6,7 @@ import { Box, Button, FormControl, Grid, MenuItem, Select, Stack, Typography } f
 
 // project-imports
 import EcommerceDataChart from './EcommerceDataChart';
-import MainCard from 'components/MainCard';
+import MainCard from '@/Components/MainCard';
 
 // assets
 import { ArrowUp } from 'iconsax-react';

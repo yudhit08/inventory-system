@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RiwayatPengaduanController;
+use App\Http\Controllers\TambahPengaduan;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -8,13 +11,11 @@ use Inertia\Inertia;
 Route::redirect('/', "/dashboard");
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard/Default');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('/riwayat-pengaduan', function () {
-        return Inertia::render('RiwayatPengaduan');
-    })->name('riwayat-pengaduan');
+    Route::get('/pengaduan/riwayat-pengaduan', [RiwayatPengaduanController::class, 'index'])->name('riwayat-pengaduan');
+    Route::get('/pengaduan/buat-pengaduan/layanan', [TambahPengaduan::class, 'layanan'])->name('buat-pengaduan-layanan');
+    Route::get('/pengaduan/buat-pengaduan/barang', [TambahPengaduan::class, 'barang'])->name('buat-pengaduan-barang');
 });
 
 Route::middleware('auth')->group(function () {

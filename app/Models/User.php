@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -85,5 +86,10 @@ class User extends Authenticatable
 
     public function jabatans(): BelongsTo {
         return $this->belongsTo(Jabatan::class, 'nip_pegawai', 'nip');
+    }
+
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Roles::class, 'role_user', 'user_id', 'role_id');
     }
 }

@@ -1,4 +1,4 @@
-import mockData, { range } from 'utils/mock-data';
+import mockData, { range } from '@/utils/mock-data';
 
 const newPerson = (index) => {
   const tempData = mockData(index);

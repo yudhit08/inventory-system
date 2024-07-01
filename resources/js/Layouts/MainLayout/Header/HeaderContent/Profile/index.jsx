@@ -189,7 +189,7 @@ const ProfilePage = () => {
                                                             variant="body2"
                                                             color="secondary"
                                                         >
-                                                            UI/UX Designer
+                                                            {user?.nip}
                                                         </Typography>
                                                     </Stack>
                                                 </Stack>

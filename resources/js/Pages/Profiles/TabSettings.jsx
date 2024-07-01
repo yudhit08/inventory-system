@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 
 // project-imports
-import MainCard from "../../Components/MainCard";
+import MainCard from "@/Components/MainCard";
 
 // assets
 import { DocumentLike, Sms, Translate } from "iconsax-react";

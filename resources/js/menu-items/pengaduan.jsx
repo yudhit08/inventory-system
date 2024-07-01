@@ -24,7 +24,7 @@ const pengaduan = {
       id: 'riwayat',
       title: <FormattedMessage id="riwayat-pengaduan" />,
       type: 'item',
-      url: '/riwayat-pengaduan',
+      url: '/pengaduan/riwayat-pengaduan',
       icon: icons.statistics
     },
     {
@@ -35,15 +35,15 @@ const pengaduan = {
       children: [
         {
           id: 'layanan',
-          title: <FormattedMessage id="pengaduan-layanan" />,
+          title: <FormattedMessage id="layanan" />,
           type: 'item',
-          url: '/laporan/layanan'
+          url: '/pengaduan/buat-pengaduan/layanan'
         },
         {
           id: 'barang',
-          title: <FormattedMessage id="pengaduan-barang" />,
+          title: <FormattedMessage id="barang" />,
           type: 'item',
-          url: '/laporan/barang'
+          url: '/pengaduan/buat-pengaduan/barang'
         }
       ]
     }

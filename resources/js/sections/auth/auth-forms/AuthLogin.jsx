@@ -65,6 +65,7 @@ const AuthLogin = ({ forgot }) => {
             })
             .catch((err) => {
                 console.error(err);
+                errors.email = err.response.data.message
             });
     };
 
