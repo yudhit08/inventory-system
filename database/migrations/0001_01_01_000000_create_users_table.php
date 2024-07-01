@@ -20,6 +20,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->foreignUuid("ruangan_id")->on("ruangans")->references("id");
+            $table->foreignUuid("jabatan_id")->on("jabatans")->references("id");
             $table->timestamps();
         });
 

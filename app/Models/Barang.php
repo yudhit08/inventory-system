@@ -13,21 +13,21 @@ class Barang extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'penanggung_jawab', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function pengaduans(): HasMany
     {
-        return $this->hasMany(Pengaduan::class, 'id_barang', 'no_bmn');
+        return $this->hasMany(Pengaduan::class, 'barang_id', 'no_bmn');
     }
 
     public function ruangan(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'ruangan', 'id');
+        return $this->belongsTo(Ruangan::class, 'ruangan_id', 'id');
     }
 
     public function jenisBarang(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'jenis_barang', 'id');
+        return $this->belongsTo(JenisBarang::class, 'jenis_barang_id', 'id');
     }
 }

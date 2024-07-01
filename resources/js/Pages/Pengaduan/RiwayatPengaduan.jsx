@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@inertiajs/react";
 import moment from "moment";
 
 // material-ui
@@ -106,8 +106,8 @@ function ReactTable({ columns, data }) {
                         data={rows.map((d) => d.original)}
                         filename={"payroll.csv"}
                     />
-                    <Link to={"/keuangan/tambah-data/data-payroll"}>
-                        <Button variant="contained">Tambah Data</Button>
+                    <Link href={"/pengaduan/buat-pengaduan/layanan"}>
+                        <Button variant="contained">Buat Pengaduan</Button>
                     </Link>
                 </Stack>
             </Stack>

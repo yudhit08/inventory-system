@@ -12,21 +12,21 @@ class Pengaduan extends Model
 
     public function userPengaduan(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'id_pelapor', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function userPelapor(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'id_petugas', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function barang(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'id_barang', 'no_bmn');
+        return $this->belongsTo(Barang::class, 'barang_id', 'id');
     }
 
     public function jenisLayanan(): BelongsTo
     {
-        return $this->belongsTo(JenisLayanan::class, 'jenis_layanan', 'id');
+        return $this->belongsTo(JenisLayanan::class, 'layanan_id', 'id');
     }
 }

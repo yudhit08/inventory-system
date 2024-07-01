@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('nilai_pengadaan');
             $table->dateTime("riwayat_perbaikan")->nullable();
             $table->string('status');
+            $table->foreign("jenis_barang_id")->on("jenis_barangs")->references("id");
             $table->timestamps();
         });
     }

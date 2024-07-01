@@ -66,26 +66,31 @@ class User extends Authenticatable
 
     public function barangs(): HasMany
     {
-        return $this->hasMany(Barang::class, 'penanggung_jawab', 'id');
+        return $this->hasMany(Barang::class, 'user_id', 'id');
     }
 
     public function pelaporPengaduans(): HasMany
     {
-        return $this->hasMany(Pengaduan::class, 'nip_pelapor', 'nip');
+        return $this->hasMany(Pengaduan::class, 'user_id', 'id');
     }
 
     public function petugasPengaduans(): HasMany
     {
-        return $this->hasMany(Pengaduan::class, 'nip_petugas', 'nip');
+        return $this->hasMany(Pengaduan::class, 'user_id', 'id');
     }
 
     public function ruangans(): BelongsTo
     {
-        return $this->belongsTo(Ruangan::class, 'penanggung_jawab', 'id');
+        return $this->belongsTo(Ruangan::class, 'ruangan_id', 'id');
+    }
+
+    public function bidang(): BelongsTo
+    {
+        return $this->belongsTo(Bidang::class, 'bidang_id', 'id');
     }
 
     public function jabatans(): BelongsTo {
-        return $this->belongsTo(Jabatan::class, 'nip_pegawai', 'nip');
+        return $this->belongsTo(Jabatan::class, 'jabatan_id', 'id');
     }
 
     public function roles(): BelongsToMany

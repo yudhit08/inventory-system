@@ -12,11 +12,11 @@ class Ruangan extends Model
 
     public function user(): HasMany
     {
-        return $this->hasMany(User::class, 'ruangan', 'id');
+        return $this->hasMany(User::class, 'ruangan_id', 'id');
     }
 
     public function barangs(): HasMany
     {
-        return $this->hasMany(User::class, 'ruangan', 'id');
+        return $this->hasMany(Barang::class, 'ruangan_id', 'id');
     }
 }

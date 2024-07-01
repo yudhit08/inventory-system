@@ -12,6 +12,6 @@ class JenisBarang extends Model
 
     public function barangs(): HasMany
     {
-        return $this->hasMany(Barang::class, 'id_barang', 'id');
+        return $this->hasMany(Barang::class, 'jenis_barang_id', 'id');
     }
 }

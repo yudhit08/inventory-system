@@ -16,18 +16,19 @@ class UserSeeder extends Seeder
     public function run()
     {
         // Create users
-        $users = User::factory()->count(10)->create();
+        // $users = User::factory()->count(10)->create();
+
+        //Retrieve all user
+        $users = User::all();
 
         // Retrieve all roles
         $roles = Roles::all();
 
-        logger()->info($roles);
-
-        // // Example: Assign a random role to each user
-        // foreach ($users as $user) {
-        //     $user->roles()->attach(
-        //         $roles->random(rand(1, 3))->pluck('id')->toArray()
-        //     );
-        // }
+        // Example: Assign a random role to each user
+        foreach ($users as $user) {
+            $user->roles()->attach(
+                $roles->random(rand(1, 3))->pluck('id')->toArray()
+            );
+        }
     }
 }
