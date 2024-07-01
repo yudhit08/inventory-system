@@ -71,12 +71,12 @@ class User extends Authenticatable
 
     public function pelaporPengaduans(): HasMany
     {
-        return $this->hasMany(Pengaduan::class, 'user_id', 'id');
+        return $this->hasMany(Pengaduan::class, 'pelapor_user_id', 'id');
     }
 
     public function petugasPengaduans(): HasMany
     {
-        return $this->hasMany(Pengaduan::class, 'user_id', 'id');
+        return $this->hasMany(Pengaduan::class, 'petugas_user_id', 'id');
     }
 
     public function ruangans(): BelongsTo

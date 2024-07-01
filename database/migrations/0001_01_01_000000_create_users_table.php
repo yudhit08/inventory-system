@@ -11,6 +11,24 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create('ruangans', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('nama_ruangan');
+            $table->timestamps();
+        });
+
+        Schema::create('bidangs', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('nama_bidang');
+            $table->timestamps();
+        });
+
+        Schema::create('jabatans', function (Blueprint $table) {
+            $table->uuid("id")->primary();
+            $table->string('jabatan');
+            $table->timestamps();
+        });
+
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
@@ -20,8 +38,12 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->foreignUuid("ruangan_id")->on("ruangans")->references("id");
-            $table->foreignUuid("jabatan_id")->on("jabatans")->references("id");
+            $table->uuid('ruangan_id')->nullable();
+            $table->uuid('bidang_id')->nullable();
+            $table->uuid('jabatan_id')->nullable();
+            $table->foreign('ruangan_id')->references('id')->on('ruangans');
+            $table->foreign('bidang_id')->references('id')->on('bidangs');
+            $table->foreign('jabatan_id')->references('id')->on('jabatans');
             $table->timestamps();
         });
 
@@ -49,5 +71,8 @@ return new class extends Migration
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+        Schema::dropIfExists('ruangans');
+        Schema::dropIfExists('bidangs');
+        Schema::dropIfExists('jabatans');
     }
 };

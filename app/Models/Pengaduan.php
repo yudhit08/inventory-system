@@ -10,14 +10,14 @@ class Pengaduan extends Model
 {
     use HasFactory;
 
-    public function userPengaduan(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'user_id', 'id');
-    }
-
     public function userPelapor(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class, 'pelapor_user_id', 'id');
+    }
+
+    public function userPetugas(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'petugas_user_id', 'id');
     }
 
     public function barang(): BelongsTo
