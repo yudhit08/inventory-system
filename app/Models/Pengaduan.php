@@ -10,6 +10,9 @@ class Pengaduan extends Model
 {
     use HasFactory;
 
+    public $incrementing = false;
+
+
     public function userPelapor(): BelongsTo
     {
         return $this->belongsTo(User::class, 'pelapor_user_id', 'id');

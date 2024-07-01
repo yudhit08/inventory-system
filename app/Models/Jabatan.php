@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Jabatan extends Model
 {
     use HasFactory;
+    
+    public $incrementing = false;
 
     public function users(): HasMany
     {

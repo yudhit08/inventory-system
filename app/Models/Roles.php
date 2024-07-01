@@ -11,6 +11,9 @@ class Roles extends Model
 {
     use HasFactory;
 
+    public $incrementing = false;
+
+
     protected static function boot()
     {
         parent::boot();

@@ -10,6 +10,9 @@ class Ruangan extends Model
 {
     use HasFactory;
 
+    public $incrementing = false;
+
+
     public function user(): HasMany
     {
         return $this->hasMany(User::class, 'ruangan_id', 'id');

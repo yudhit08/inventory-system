@@ -10,6 +10,8 @@ class Bidang extends Model
 {
     use HasFactory;
 
+    public $incrementing = false;
+
     public function user(): HasMany
     {
         return $this->hasMany(User::class, 'bidang_id', 'id');

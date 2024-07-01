@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Role;
 use App\Models\Roles;
+use Database\Factories\RolesFactory;
 use Illuminate\Support\Str;
 
 class RolesSeeder extends Seeder

@@ -10,6 +10,9 @@ class JenisBarang extends Model
 {
     use HasFactory;
 
+    public $incrementing = false;
+
+
     public function barangs(): HasMany
     {
         return $this->hasMany(Barang::class, 'jenis_barang_id', 'id');

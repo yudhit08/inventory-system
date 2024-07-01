@@ -10,6 +10,9 @@ class JenisLayanan extends Model
 {
     use HasFactory;
 
+    public $incrementing = false;
+
+
     public function pengaduans(): HasMany
     {
         return $this->hasMany(Pengaduan::class, 'pengaduan_id', 'id');
