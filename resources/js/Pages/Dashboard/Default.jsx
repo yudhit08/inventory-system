@@ -34,14 +34,14 @@ import useAuth from "@/hooks/useAuth";
 const DashboardDefault = ({ auth }) => {
     const theme = useTheme();
 
-    const { isAuth } = useAuth();
+    // const { isAuth } = useAuth();
 
-    useEffect(() => {
-        isAuth(auth?.user)
-    }, [])
+    // useEffect(() => {
+    //     isAuth(auth?.user)
+    // }, [])
 
     return (
-        <MainLayout user={auth.user}>
+        <MainLayout user={auth?.user}>
             <Head title="Dashboard" />
             <Grid container rowSpacing={4.5} columnSpacing={2.75}>
                 <Grid item xs={12}>

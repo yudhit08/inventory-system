@@ -202,10 +202,12 @@ ReactTable.propTypes = {
 
 // ==============================|| REACT TABLE - FILTERING ||============================== //
 
-const RiwayatPengaduan = () => {
+const RiwayatPengaduan = (props) => {
     const [dataTable, setDataTable] = useState([]);
     const [downloadValue, setDownloadValue] = useState({});
     const downloadRef = useRef(null);
+
+    console.log(props)
 
     // useEffect(() => {
     //     const token =
@@ -248,28 +250,30 @@ const RiwayatPengaduan = () => {
                 Filter: false,
             },
             {
-                Header: "Tanggal Terbit",
-                accessor: "tanggal_payroll_terbit",
+                Header: "Jenis Layanan",
+                accessor: "layanan_id",
+            },
+            {
+                Header: "Nama Barang",
+                accessor: "barang",
+            },
+            {
+                Header: "Pelapor",
+                accessor: "pelapor",
+            },
+            {
+                Header: "Status",
+                accessor: "status",
+            },
+            {
+                Header: "Keterangan",
+                accessor: "keterangan",
+            },
+            {
+                Header: "Tanggal Laporan",
+                accessor: "created_at",
                 Filter: DateColumnFilter,
                 filter: "between",
-            },
-            {
-                Header: "Nama",
-                accessor: "nama",
-            },
-            {
-                Header: "Jabatan",
-                accessor: "jabatan",
-            },
-            {
-                Header: "No. Telp",
-                accessor: "no_telp",
-            },
-            {
-                Header: "Gaji Pokok",
-                accessor: "gaji_pokok",
-                Filter: SliderColumnFilter,
-                filter: "equals",
             },
             {
                 Header: "Aksi",

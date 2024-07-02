@@ -14,6 +14,7 @@ import ThemeCustomization from "./themes";
 import { store, persister } from "./store";
 import { ConfigProvider } from "./contexts/ConfigContext";
 import Locales from "./Components/Locales";
+import { useEffect } from "react";
 
 const appName = import.meta.env.VITE_APP_NAME || "Laravel";
 
@@ -31,15 +32,13 @@ createInertiaApp({
             <ReduxProvider store={store}>
                 <PersistGate loading={null} persistor={persister}>
                     <ConfigProvider>
-                        <BrowserRouter>
-                            <ThemeCustomization>
-                                <Locales>
-                                    <AuthProvider>
-                                        <App {...props} />
-                                    </AuthProvider>
-                                </Locales>
-                            </ThemeCustomization>
-                        </BrowserRouter>
+                        <ThemeCustomization>
+                            <Locales>
+                                {/* <AuthProvider> */}
+                                <App {...props} />
+                                {/* </AuthProvider> */}
+                            </Locales>
+                        </ThemeCustomization>
                     </ConfigProvider>
                 </PersistGate>
             </ReduxProvider>

@@ -1,23 +1,20 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-
-// project-imports
+import { usePage } from '@inertiajs/react';
 import useAuth from 'hooks/useAuth';
-import { router } from '@inertiajs/react';
+import { router } from '@inertiajs/inertia';
 
 // ==============================|| AUTH GUARD ||============================== //
 
 const AuthGuard = ({ children }) => {
   const { isLoggedIn } = useAuth();
-  const navigate = useNavigate();
-  const location = useLocation();
+  const { url: pathname } = usePage().props;
 
   useEffect(() => {
-    if (!isLoggedIn) {
-      router.get('login');
+    if (!isLoggedIn && pathname !== '/login') {
+      router.visit('/login');
     }
-  }, [isLoggedIn, navigate, location]);
+  }, [isLoggedIn, pathname]);
 
   return children;
 };

@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useEffect, useState, useMemo } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { usePage, router } from "@inertiajs/react";
 
 // material-ui
 import { styled, useTheme } from "@mui/material/styles";
@@ -65,9 +65,7 @@ const NavCollapse = ({
     selectedLevel,
 }) => {
     const theme = useTheme();
-    const navigation = useNavigate();
-
-    const downLG = useMediaQuery(theme.breakpoints.down("lg"));
+    const { props } = usePage();
     const { drawerOpen } = useSelector((state) => state.menu);
     const { menuOrientation } = useConfig();
 
@@ -80,12 +78,11 @@ const NavCollapse = ({
     const handleClick = (event) => {
         setAnchorEl(null);
         setSelectedLevel(level);
-        console.log(menu.id)
         if (drawerOpen) {
             setOpen(!open);
             setSelected(!selected ? menu.id : null);
             setSelectedItems(!selected ? menu.id : "");
-            if (menu.url) navigation(`${menu.url}`);
+            if (menu.url) router.visit(menu.url);
         } else {
             setAnchorEl(event?.currentTarget);
         }
@@ -93,7 +90,7 @@ const NavCollapse = ({
 
     const handlerIconLink = () => {
         if (!drawerOpen) {
-            if (menu.url) navigation(`${menu.url}`);
+            if (menu.url) router.visit(menu.url);
             setSelected(menu.id);
         }
     };
@@ -140,7 +137,7 @@ const NavCollapse = ({
         selectedLevel,
     ]);
 
-    const { pathname } = useLocation();
+    const pathname = router.page.url;
 
     useEffect(() => {
         if (pathname === menu.url) {
@@ -327,258 +324,326 @@ const NavCollapse = ({
                                             bgcolor:
                                                 theme.palette.mode ===
                                                 ThemeMode.DARK
-                                                    ? "secondary.100"
-                                                    : "primary.lighter",
-                                            "&:hover": {
-                                                bgcolor:
-                                                    theme.palette.mode ===
-                                                    ThemeMode.DARK
-                                                        ? "secondary.200"
-                                                        : "primary.lighter",
-                                            },
+                                                    ? "secondary.light"
+                                                    : "secondary.200",
                                         }),
                                 }}
                             >
                                 {menuIcon}
                             </ListItemIcon>
                         )}
-
-                        {!menuIcon && drawerOpen && (
-                            <ListItemIcon
-                                sx={{
-                                    minWidth: 30,
-                                }}
-                            >
-                                <Dot
-                                    size={isSelected ? 6 : 5}
-                                    color={isSelected ? "primary" : "secondary"}
-                                />
-                            </ListItemIcon>
-                        )}
-
                         {(drawerOpen || (!drawerOpen && level !== 1)) && (
                             <ListItemText
+                                onClick={handlerIconLink}
                                 primary={
                                     <Typography
-                                        variant="h6"
-                                        color={
-                                            isSelected ? "primary" : textColor
+                                        variant={
+                                            isSelected && drawerOpen
+                                                ? "h5"
+                                                : "body1"
                                         }
-                                        sx={{
-                                            fontWeight: isSelected ? 500 : 400,
-                                        }}
+                                        color="inherit"
                                     >
                                         {menu.title}
                                     </Typography>
                                 }
-                                secondary={
-                                    menu.caption && (
-                                        <Typography
-                                            variant="caption"
-                                            color="secondary"
-                                        >
-                                            {menu.caption}
-                                        </Typography>
-                                    )
-                                }
                             />
                         )}
-                        {(drawerOpen || (!drawerOpen && level !== 1)) &&
-                            (miniMenuOpened || open ? (
-                                <>
-                                    {miniMenuOpened ? (
-                                        <ArrowRight2
-                                            size={12}
-                                            color={textColor}
-                                            style={{ marginLeft: 1 }}
-                                        />
-                                    ) : (
-                                        <ArrowUp2
-                                            size={12}
-                                            color={textColor}
-                                            style={{ marginLeft: 1 }}
-                                        />
-                                    )}
-                                </>
-                            ) : (
-                                <ArrowDown2
-                                    size={12}
-                                    color={textColor}
-                                    style={{ marginLeft: 1 }}
-                                />
-                            ))}
-
-                        {!drawerOpen && (
-                            <PopperStyled
-                                open={miniMenuOpened}
-                                anchorEl={anchorEl}
-                                placement="right-start"
-                                style={{
-                                    zIndex: 2001,
-                                }}
-                                popperOptions={{
-                                    modifiers: [
-                                        {
-                                            name: "offset",
-                                            options: {
-                                                offset: [-12, 1],
-                                            },
-                                        },
-                                    ],
-                                }}
-                            >
-                                {({ TransitionProps }) => (
-                                    <Transitions
-                                        in={miniMenuOpened}
-                                        {...TransitionProps}
+                        {(drawerOpen || (!drawerOpen && level !== 1)) && (
+                            <Box onClick={handleClick}>{open ? <ArrowUp2 /> : <ArrowDown2 />}</Box>
+                        )}
+                        {!drawerOpen && level === 1 && (
+                            <ClickAwayListener onClickAway={handleClose}>
+                                <Transitions
+                                    in={miniMenuOpened}
+                                    onEnter={() => setOpen(true)}
+                                    onExited={() => setOpen(false)}
+                                    type="fade"
+                                    position="absolute"
+                                    sx={{
+                                        overflowY: "visible",
+                                        overflowX: "hidden",
+                                        top: -8,
+                                        left: 47,
+                                        zIndex: 2001,
+                                        width: "auto",
+                                        minWidth: 180,
+                                    }}
+                                >
+                                    <Paper
+                                        sx={{
+                                            overflow: "hidden",
+                                            mt: 1.5,
+                                            boxShadow: theme.customShadows.z1,
+                                            backgroundImage: "none",
+                                        }}
                                     >
-                                        <Paper
-                                            sx={{
-                                                overflow: "hidden",
-                                                mt: 1.5,
-                                                boxShadow:
-                                                    theme.customShadows.z1,
-                                                backgroundImage: "none",
-                                                border: `1px solid ${theme.palette.divider}`,
-                                            }}
-                                        >
-                                            <ClickAwayListener
-                                                onClickAway={handleClose}
+                                        {miniMenuOpened && (
+                                            <Box
+                                                sx={{
+                                                    p: 2.5,
+                                                    pb: 0,
+                                                }}
                                             >
-                                                <>
-                                                    <SimpleBar
-                                                        sx={{
-                                                            overflowX: "hidden",
-                                                            overflowY: "auto",
-                                                            maxHeight:
-                                                                "calc(100vh - 170px)",
-                                                        }}
-                                                    >
-                                                        {navCollapse}
-                                                    </SimpleBar>
-                                                </>
-                                            </ClickAwayListener>
-                                        </Paper>
-                                    </Transitions>
-                                )}
-                            </PopperStyled>
+                                                <Typography variant="h6">
+                                                    {menu.title}
+                                                </Typography>
+                                            </Box>
+                                        )}
+                                        {miniMenuOpened && (
+                                            <SimpleBar
+                                                sx={{
+                                                    height: "calc(100vh - 215px)",
+                                                    "& .simplebar-content": {
+                                                        display: "flex",
+                                                        flexDirection:
+                                                            "column",
+                                                    },
+                                                }}
+                                            >
+                                                <List
+                                                    component="nav"
+                                                    sx={{
+                                                        p: 1,
+                                                    }}
+                                                >
+                                                    {navCollapse}
+                                                </List>
+                                            </SimpleBar>
+                                        )}
+                                    </Paper>
+                                </Transitions>
+                            </ClickAwayListener>
                         )}
                     </ListItemButton>
                     {drawerOpen && (
                         <Collapse in={open} timeout="auto" unmountOnExit>
-                            <List sx={{ p: 0 }}>{navCollapse}</List>
+                            <List
+                                component="div"
+                                sx={{
+                                    position: "relative",
+                                    "&:after": {
+                                        content: '""',
+                                        position: "absolute",
+                                        left: "32px",
+                                        top: 0,
+                                        height: "100%",
+                                        width: "1px",
+                                        opacity: theme.palette.mode === ThemeMode.DARK ? 0.2 : 1,
+                                        background:
+                                            theme.palette.mode === ThemeMode.DARK
+                                                ? theme.palette.secondary[200]
+                                                : theme.palette.secondary.light,
+                                    },
+                                }}
+                            >
+                                {navCollapse}
+                            </List>
                         </Collapse>
                     )}
                 </>
             ) : (
                 <>
                     <ListItemButton
-                        id={`boundary-${popperId}`}
                         selected={isSelected}
-                        onMouseEnter={handleHover}
-                        onMouseLeave={handleClose}
-                        onClick={handleHover}
-                        aria-describedby={popperId}
+                        {...(!drawerOpen && {
+                            onMouseEnter: handleHover,
+                            onMouseLeave: handleClose,
+                        })}
+                        onClick={handleClick}
                         sx={{
-                            "&:hover": {
-                                bgcolor: "transparent",
-                            },
-                            "&.Mui-selected": {
+                            pl: drawerOpen
+                                ? `${level === 1 ? 20 : level * 20 - 10}px`
+                                : 1.5,
+                            py: !drawerOpen && level === 1 ? 1.25 : 1,
+                            ...(drawerOpen && {
+                                mx: 1.25,
+                                my: 0.5,
+                                borderRadius: 1,
+                                "&:hover": {
+                                    bgcolor:
+                                        theme.palette.mode === ThemeMode.DARK
+                                            ? "divider"
+                                            : "secondary.200",
+                                },
+                                "&.Mui-selected": {
+                                    color: iconSelectedColor,
+                                },
+                            }),
+                            ...(!drawerOpen && {
+                                px: 2.75,
+                                justifyContent: "center",
                                 "&:hover": {
                                     bgcolor: "transparent",
                                 },
-                                bgcolor: "transparent",
-                            },
+                                "&.Mui-selected": {
+                                    "&:hover": {
+                                        bgcolor: "transparent",
+                                    },
+                                    bgcolor: "transparent",
+                                },
+                            }),
                         }}
                     >
-                        <Box onClick={handlerIconLink} sx={FlexBox}>
-                            {menuIcon && (
-                                <ListItemIcon
-                                    sx={{
-                                        my: "auto",
-                                        minWidth: !menu.icon ? 18 : 36,
-                                        color: theme.palette.secondary.dark,
-                                    }}
-                                >
-                                    {menuIcon}
-                                </ListItemIcon>
-                            )}
+                        {menuIcon && (
+                            <ListItemIcon
+                                onClick={handlerIconLink}
+                                sx={{
+                                    minWidth: 38,
+                                    color: isSelected
+                                        ? "primary.main"
+                                        : textColor,
+                                    ...(!drawerOpen && {
+                                        borderRadius: 1,
+                                        width: 46,
+                                        height: 46,
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        "&:hover": {
+                                            bgcolor:
+                                                theme.palette.mode ===
+                                                ThemeMode.DARK
+                                                    ? "secondary.light"
+                                                    : "secondary.200",
+                                        },
+                                    }),
+                                    ...(!drawerOpen &&
+                                        isSelected && {
+                                            bgcolor:
+                                                theme.palette.mode ===
+                                                ThemeMode.DARK
+                                                    ? "secondary.light"
+                                                    : "secondary.200",
+                                        }),
+                                }}
+                            >
+                                {menuIcon}
+                            </ListItemIcon>
+                        )}
+                        {(drawerOpen || (!drawerOpen && level !== 1)) && (
                             <ListItemText
+                                onClick={handlerIconLink}
                                 primary={
                                     <Typography
-                                        variant="h6"
-                                        color={textColor}
-                                        sx={{
-                                            fontWeight: isSelected ? 500 : 400,
-                                        }}
+                                        variant={
+                                            isSelected && drawerOpen
+                                                ? "h5"
+                                                : "body1"
+                                        }
+                                        color="inherit"
                                     >
                                         {menu.title}
                                     </Typography>
                                 }
                             />
-                            {miniMenuOpened ? (
-                                <ArrowRight2 size={12} color={textColor} />
-                            ) : (
-                                <ArrowDown2 size={12} color={textColor} />
-                            )}
-                        </Box>
-
-                        {anchorEl && (
-                            <PopperStyled
-                                id={popperId}
-                                open={miniMenuOpened}
-                                anchorEl={anchorEl}
-                                placement="right-start"
-                                style={{
-                                    zIndex: 2001,
-                                }}
-                                modifiers={[
-                                    {
-                                        name: "offset",
-                                        options: {
-                                            offset: [-10, 0],
+                        )}
+                        {(drawerOpen || (!drawerOpen && level !== 1)) && (
+                            <Box onClick={handleClick}>{open ? <ArrowUp2 /> : <ArrowDown2 />}</Box>
+                        )}
+                        {!drawerOpen && level === 1 && (
+                            <ClickAwayListener onClickAway={handleClose}>
+                                <PopperStyled
+                                    popperId={popperId}
+                                    open={miniMenuOpened}
+                                    anchorEl={anchorEl}
+                                    placement="right-start"
+                                    disablePortal
+                                    modifiers={[
+                                        {
+                                            name: "offset",
+                                            options: {
+                                                offset: [-12, 1],
+                                            },
                                         },
-                                    },
-                                ]}
-                            >
-                                {({ TransitionProps }) => (
-                                    <Transitions
-                                        in={miniMenuOpened}
-                                        {...TransitionProps}
-                                    >
-                                        <Paper
-                                            sx={{
-                                                overflow: "hidden",
-                                                mt: 1.5,
-                                                py: 0.5,
-                                                boxShadow:
-                                                    theme.customShadows.z1,
-                                                border: `1px solid ${theme.palette.divider}`,
-                                                backgroundImage: "none",
-                                            }}
+                                    ]}
+                                >
+                                    {({ TransitionProps }) => (
+                                        <Transitions
+                                            in={miniMenuOpened}
+                                            {...TransitionProps}
+                                            onEnter={() => setOpen(true)}
+                                            onExited={() => setOpen(false)}
+                                            type="zoom"
+                                            sx={{ transformOrigin: "left top" }}
                                         >
-                                            <ClickAwayListener
-                                                onClickAway={handleClose}
+                                            <Paper
+                                                sx={{
+                                                    overflow: "hidden",
+                                                    mt: 1.5,
+                                                    boxShadow:
+                                                        theme.customShadows.z1,
+                                                    backgroundImage: "none",
+                                                }}
                                             >
-                                                <>
-                                                    <SimpleBar
+                                                {miniMenuOpened && (
+                                                    <Box
                                                         sx={{
-                                                            overflowX: "hidden",
-                                                            overflowY: "auto",
-                                                            maxHeight:
-                                                                "calc(100vh - 170px)",
+                                                            p: 2.5,
+                                                            pb: 0,
                                                         }}
                                                     >
-                                                        {navCollapse}
+                                                        <Typography variant="h6">
+                                                            {menu.title}
+                                                        </Typography>
+                                                    </Box>
+                                                )}
+                                                {miniMenuOpened && (
+                                                    <SimpleBar
+                                                        sx={{
+                                                            height: "calc(100vh - 215px)",
+                                                            "& .simplebar-content": {
+                                                                display:
+                                                                    "flex",
+                                                                flexDirection:
+                                                                    "column",
+                                                            },
+                                                        }}
+                                                    >
+                                                        <List
+                                                            component="nav"
+                                                            sx={{
+                                                                p: 1,
+                                                            }}
+                                                        >
+                                                            {navCollapse}
+                                                        </List>
                                                     </SimpleBar>
-                                                </>
-                                            </ClickAwayListener>
-                                        </Paper>
-                                    </Transitions>
-                                )}
-                            </PopperStyled>
+                                                )}
+                                            </Paper>
+                                        </Transitions>
+                                    )}
+                                </PopperStyled>
+                            </ClickAwayListener>
                         )}
                     </ListItemButton>
+                    {drawerOpen && (
+                        <Collapse in={open} timeout="auto" unmountOnExit>
+                            <List
+                                component="div"
+                                sx={{
+                                    position: "relative",
+                                    "&:after": {
+                                        content: '""',
+                                        position: "absolute",
+                                        left: "32px",
+                                        top: 0,
+                                        height: "100%",
+                                        width: "1px",
+                                        opacity:
+                                            theme.palette.mode === ThemeMode.DARK
+                                                ? 0.2
+                                                : 1,
+                                        background:
+                                            theme.palette.mode === ThemeMode.DARK
+                                                ? theme.palette.secondary[200]
+                                                : theme.palette.secondary.light,
+                                    },
+                                }}
+                            >
+                                {navCollapse}
+                            </List>
+                        </Collapse>
+                    )}
                 </>
             )}
         </>

@@ -5,14 +5,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 // project-imports
 import { APP_DEFAULT_PATH } from "../../config";
 import useAuth from "../../hooks/useAuth";
-import { router } from "@inertiajs/react";
+import { router, usePage } from "@inertiajs/react";
 
 // ==============================|| GUEST GUARD ||============================== //
 
 const GuestGuard = ({ children }) => {
     const { isLoggedIn } = useAuth();
-    const navigate = useNavigate();
-    const location = useLocation();
+    const { url: pathname } = usePage().props;
 
     useEffect(() => {
         if (isLoggedIn) {
@@ -20,7 +19,7 @@ const GuestGuard = ({ children }) => {
                 location?.state?.from ? location?.state?.from : APP_DEFAULT_PATH
             );
         }
-    }, [isLoggedIn, navigate, location]);
+    }, [isLoggedIn, pathname]);
 
     return children;
 };

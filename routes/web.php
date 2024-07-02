@@ -8,14 +8,16 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::redirect('/', "/dashboard");
 
 Route::middleware(['auth', 'verified'])->group(function () {
+    Route::redirect('/', "/dashboard");
+    
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/pengaduan/riwayat-pengaduan', [RiwayatPengaduanController::class, 'index'])->name('riwayat-pengaduan');
     Route::get('/pengaduan/buat-pengaduan/layanan', [TambahPengaduan::class, 'layanan'])->name('buat-pengaduan-layanan');
     Route::get('/pengaduan/buat-pengaduan/barang', [TambahPengaduan::class, 'barang'])->name('buat-pengaduan-barang');
+    Route::post('/pengaduan/buat-pengaduan/barang', [TambahPengaduan::class, 'tambahBarang'])->name('buat-pengaduan-barang');
 });
 
 Route::middleware('auth')->group(function () {

@@ -18,10 +18,9 @@ import {
 } from "@mui/material";
 
 // project-imports
-import useAuth from "../../../hooks/useAuth";
-import useScriptRef from "../../../hooks/useScriptRef";
-import IconButton from "../../../Components/@extended/IconButton";
-import AnimateButton from "../../../Components/@extended/AnimateButton";
+import useScriptRef from "@/hooks/useScriptRef";
+import IconButton from "@/Components/@extended/IconButton";
+import AnimateButton from "@/Components/@extended/AnimateButton";
 
 // assets
 import { Eye, EyeSlash } from "iconsax-react";
@@ -30,7 +29,6 @@ import axios from "axios";
 // ============================|| JWT - LOGIN ||============================ //
 
 const AuthLogin = ({ forgot }) => {
-    const { isLoggedIn, login } = useAuth();
     const scriptedRef = useScriptRef();
 
     const [showPassword, setShowPassword] = useState(false);
@@ -57,16 +55,7 @@ const AuthLogin = ({ forgot }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios
-            .post(route("login"), data)
-            .then((page) => {
-                const { user } = page.data;
-                login({ user });
-            })
-            .catch((err) => {
-                console.error(err);
-                errors.email = err.response.data.message
-            });
+        post(route("login"))
     };
 
     return (

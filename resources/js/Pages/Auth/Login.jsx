@@ -5,7 +5,6 @@ import { Grid, Stack, Typography } from "@mui/material";
 
 // project-imports
 import Logo from "../../Components/logo";
-import useAuth from "../../hooks/useAuth";
 import AuthSocButton from "../../sections/auth/AuthSocButton";
 import AuthDivider from "../../sections/auth/AuthDivider";
 import AuthWrapper from "../../sections/auth/AuthWrapper";
@@ -17,7 +16,6 @@ import imgBps from "../../assets/images/auth/logo-bps.svg";
 // ================================|| LOGIN ||================================ //
 
 const Login = () => {
-    const { isLoggedIn } = useAuth();
 
     return (
         <AuthWrapper>

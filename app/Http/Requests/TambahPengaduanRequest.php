@@ -6,8 +6,12 @@ use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class ProfileUpdateRequest extends FormRequest
+class TambahPengaduanRequest extends FormRequest
 {
+    public function authorize(): bool
+    {
+        return false;
+    }
     /**
      * Get the validation rules that apply to the request.
      *
@@ -16,8 +20,9 @@ class ProfileUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
+            'keterangan' => ['required', 'string'],
+            'barang' => ['required', 'string'],
+            'layanan' => ['required', 'string'],
         ];
     }
 }

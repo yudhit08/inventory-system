@@ -20,7 +20,7 @@ import { HambergerMenu } from "iconsax-react";
 
 // ==============================|| MAIN LAYOUT - HEADER ||============================== //
 
-const Header = () => {
+const Header = ({user}) => {
     const theme = useTheme();
     const downLG = useMediaQuery(theme.breakpoints.down("lg"));
 
@@ -31,7 +31,7 @@ const Header = () => {
         menuOrientation === MenuOrientation.HORIZONTAL && !downLG;
 
     // header content
-    const headerContent = useMemo(() => <HeaderContent />, []);
+    const headerContent = useMemo(() => <HeaderContent user={user} />, []);
 
     const iconBackColorOpen =
         theme.palette.mode === ThemeMode.DARK

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { usePage, Link } from '@inertiajs/react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -28,14 +28,9 @@ function getPathIndex(pathname) {
 
 const ProfileTab = () => {
   const theme = useTheme();
-  const navigate = useNavigate();
-  const { pathname } = useLocation();
+  const { url: pathname } = usePage().props;
 
   const [selectedIndex, setSelectedIndex] = useState(getPathIndex(pathname));
-  const handleListItemClick = (index, route) => {
-    setSelectedIndex(index);
-    navigate(route);
-  };
 
   useEffect(() => {
     setSelectedIndex(getPathIndex(pathname));
@@ -43,19 +38,19 @@ const ProfileTab = () => {
 
   return (
     <List component="nav" sx={{ p: 0, '& .MuiListItemIcon-root': { minWidth: 32, color: theme.palette.secondary.main } }}>
-      <ListItemButton selected={selectedIndex === 0} onClick={() => handleListItemClick(0, '/apps/profiles/user/personal')}>
+      <ListItemButton selected={selectedIndex === 0} component={Link} href="/apps/profiles/user/personal">
         <ListItemIcon>
           <Profile size={18} />
         </ListItemIcon>
         <ListItemText primary="Personal Information" />
       </ListItemButton>
-      <ListItemButton selected={selectedIndex === 1} onClick={() => handleListItemClick(2, '/apps/profiles/user/password')}>
+      <ListItemButton selected={selectedIndex === 1} component={Link} href="/apps/profiles/user/password">
         <ListItemIcon>
           <Lock size={18} />
         </ListItemIcon>
         <ListItemText primary="Change Password" />
       </ListItemButton>
-      <ListItemButton selected={selectedIndex === 2} onClick={() => handleListItemClick(3, '/apps/profiles/user/settings')}>
+      <ListItemButton selected={selectedIndex === 2} component={Link} href="/apps/profiles/user/settings">
         <ListItemIcon>
           <Setting3 size={18} />
         </ListItemIcon>

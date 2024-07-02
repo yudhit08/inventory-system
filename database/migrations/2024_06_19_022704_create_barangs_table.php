@@ -43,11 +43,11 @@ return new class extends Migration
         Schema::create('pengaduans', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->longText('keterangan');
-            $table->string("hasil_perbaikan");
-            $table->string('status');
+            $table->string("hasil_perbaikan")->nullable();
+            $table->string('status')->nullable(false)->default("pending");
             $table->dateTime('waktu_penyelesaian')->nullable();
             $table->uuid("pelapor_user_id")->nullable(false);
-            $table->uuid("petugas_user_id")->nullable(false);
+            $table->uuid("petugas_user_id")->nullable();
             $table->uuid("barang_id")->nullable(false);
             $table->uuid("layanan_id")->nullable(false);
             $table->foreign("pelapor_user_id")->references("id")->on("users");

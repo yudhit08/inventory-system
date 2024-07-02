@@ -68,15 +68,15 @@ function a11yProps(index) {
 
 // ==============================|| HEADER CONTENT - PROFILE ||============================== //
 
-const ProfilePage = () => {
+const ProfilePage = ({user}) => {
     const theme = useTheme();
     const { post } = useForm();
 
-    const { logout, user } = useAuth();
+    // const { logout, user } = useAuth();
 
     const handleLogout = async () => {
         try {
-            post(route("logout"));
+            post(route("logout"))
         } catch (err) {
             console.error(err);
         }

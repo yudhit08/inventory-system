@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState, Fragment } from 'react';
-import { useLocation } from 'react-router';
+import { usePage, router } from '@inertiajs/react';
 
 // material-ui
 import { useTheme, styled } from '@mui/material/styles';
@@ -61,7 +61,7 @@ const PopperStyled = styled(Popper)(({ theme }) => ({
 
 const NavGroup = ({ item, lastItem, remItems, lastItemId, setSelectedItems, selectedItems, setSelectedLevel, selectedLevel }) => {
   const theme = useTheme();
-  const { pathname } = useLocation();
+  const { url: pathname } = usePage().props;
 
   const { menuOrientation, menuCaption } = useConfig();
   const { drawerOpen, selectedID } = useSelector((state) => state.menu);
