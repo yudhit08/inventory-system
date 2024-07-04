@@ -2,7 +2,7 @@
 import { CardContent, Grid, Skeleton, Stack } from '@mui/material';
 
 // project-imports
-import MainCard from 'components/MainCard';
+import MainCard from '@/Components/MainCard';
 
 // ===========================|| SKELETON - PRODUCT CARD ||=========================== //
 

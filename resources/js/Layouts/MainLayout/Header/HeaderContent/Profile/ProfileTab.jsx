@@ -30,7 +30,7 @@ const ProfileTab = ({ handleLogout }) => {
             component="nav"
             sx={{ p: 0, "& .MuiListItemIcon-root": { minWidth: 32 } }}
         >
-            <ListItemButton
+            {/* <ListItemButton
                 selected={selectedIndex === 0}
                 onClick={(event) => handleListItemClick(event, 0)}
             >
@@ -57,7 +57,7 @@ const ProfileTab = ({ handleLogout }) => {
                     <Profile2User variant="Bulk" size={18} />
                 </ListItemIcon>
                 <ListItemText primary="Social Profile" />
-            </ListItemButton>
+            </ListItemButton> */}
             <ListItemButton
                 selected={selectedIndex === 3}
                 onClick={handleLogout}

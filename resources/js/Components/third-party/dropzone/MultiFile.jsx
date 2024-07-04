@@ -8,7 +8,7 @@ import { Box, Button, Stack } from '@mui/material';
 import { useDropzone } from 'react-dropzone';
 
 // project-imports
-import { DropzopType } from 'config';
+import { DropzopType } from '@/config';
 import RejectionFiles from './RejectionFiles';
 import PlaceholderContent from './PlaceholderContent';
 import FilesPreview from './FilesPreview';
@@ -27,9 +27,12 @@ const DropzoneWrapper = styled('div')(({ theme }) => ({
 const MultiFileUpload = ({ error, showList = false, files, type, setFieldValue, sx, onUpload }) => {
   const { getRootProps, getInputProps, isDragActive, isDragReject, fileRejections } = useDropzone({
     multiple: true,
+    accept: {
+        'image/*': ['.jpg', '.jpeg', '.pjpeg', '.png']
+    },
     onDrop: (acceptedFiles) => {
       if (files) {
-        setFieldValue('files', [
+        setFieldValue('gambar', [
           ...files,
           ...acceptedFiles.map((file) =>
             Object.assign(file, {
@@ -39,7 +42,7 @@ const MultiFileUpload = ({ error, showList = false, files, type, setFieldValue, 
         ]);
       } else {
         setFieldValue(
-          'files',
+          'gambar',
           acceptedFiles.map((file) =>
             Object.assign(file, {
               preview: URL.createObjectURL(file)
@@ -51,12 +54,12 @@ const MultiFileUpload = ({ error, showList = false, files, type, setFieldValue, 
   });
 
   const onRemoveAll = () => {
-    setFieldValue('files', null);
+    setFieldValue('gambar', null);
   };
 
   const onRemove = (file) => {
     const filteredItems = files && files.filter((_file) => _file !== file);
-    setFieldValue('files', filteredItems);
+    setFieldValue('gambar', filteredItems);
   };
 
   return (
@@ -103,9 +106,6 @@ const MultiFileUpload = ({ error, showList = false, files, type, setFieldValue, 
         <Stack direction="row" justifyContent="flex-end" spacing={1.5} sx={{ mt: 1.5 }}>
           <Button color="inherit" size="small" onClick={onRemoveAll}>
             Remove all
-          </Button>
-          <Button size="small" variant="contained" onClick={onUpload}>
-            Upload files
           </Button>
         </Stack>
       )}

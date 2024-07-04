@@ -31,7 +31,7 @@ import useAuth from "@/hooks/useAuth";
 
 // ==============================|| DASHBOARD - DEFAULT ||============================== //
 
-const DashboardDefault = ({ auth }) => {
+const DashboardDefault = (props) => {
     const theme = useTheme();
 
     // const { isAuth } = useAuth();
@@ -41,7 +41,7 @@ const DashboardDefault = ({ auth }) => {
     // }, [])
 
     return (
-        <MainLayout user={auth?.user}>
+        <MainLayout user={props.auth?.user} roles={props.auth?.roles}>
             <Head title="Dashboard" />
             <Grid container rowSpacing={4.5} columnSpacing={2.75}>
                 <Grid item xs={12}>

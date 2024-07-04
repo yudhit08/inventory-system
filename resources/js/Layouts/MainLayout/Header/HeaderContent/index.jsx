@@ -17,7 +17,7 @@ import { MenuOrientation } from "../../../../config";
 
 // ==============================|| HEADER - CONTENT ||============================== //
 
-const HeaderContent = ({user}) => {
+const HeaderContent = ({user, roles}) => {
     const { i18n, menuOrientation } = useConfig();
 
     const downLG = useMediaQuery((theme) => theme.breakpoints.down("lg"));
@@ -38,7 +38,7 @@ const HeaderContent = ({user}) => {
 
             {/* <Notification /> */}
             {/* <Message /> */}
-            {!downLG && <Profile user={user} />}
+            {!downLG && <Profile user={user} roles={roles} />}
             {downLG && <MobileSection />}
         </>
     );

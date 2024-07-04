@@ -1,16 +1,16 @@
 import { sum } from 'lodash';
-import { Link } from 'react-router-dom';
+import { Link } from '@inertiajs/react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import { Fab, Badge } from '@mui/material';
 
 // project-imports
-import { useSelector } from 'store';
+import { useSelector } from '@/store';
 
 // assets
 import { ShoppingCart } from 'iconsax-react';
-import IconButton from 'components/@extended/IconButton';
+import IconButton from '@/Components/@extended/IconButton';
 
 // ==============================|| CART ITEMS - FLOATING BUTTON ||============================== //
 

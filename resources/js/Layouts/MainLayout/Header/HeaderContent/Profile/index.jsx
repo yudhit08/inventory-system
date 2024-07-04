@@ -68,7 +68,7 @@ function a11yProps(index) {
 
 // ==============================|| HEADER CONTENT - PROFILE ||============================== //
 
-const ProfilePage = ({user}) => {
+const ProfilePage = ({ user, roles }) => {
     const theme = useTheme();
     const { post } = useForm();
 
@@ -76,7 +76,7 @@ const ProfilePage = ({user}) => {
 
     const handleLogout = async () => {
         try {
-            post(route("logout"))
+            post(route("logout"));
         } catch (err) {
             console.error(err);
         }
@@ -185,12 +185,18 @@ const ProfilePage = ({user}) => {
                                                         <Typography variant="subtitle1">
                                                             {user?.name}
                                                         </Typography>
-                                                        <Typography
-                                                            variant="body2"
-                                                            color="secondary"
-                                                        >
-                                                            {user?.nip}
-                                                        </Typography>
+                                                        {roles?.map((role) => {
+                                                            return (
+                                                                <Typography
+                                                                    key={role}
+                                                                    variant="body2"
+                                                                    color="secondary"
+                                                                    textTransform={"capitalize"}
+                                                                >
+                                                                    {role}
+                                                                </Typography>
+                                                            );
+                                                        })}
                                                     </Stack>
                                                 </Stack>
                                             </Grid>
@@ -241,7 +247,7 @@ const ProfilePage = ({user}) => {
                                                 label="Profile"
                                                 {...a11yProps(0)}
                                             />
-                                            <Tab
+                                            {/* <Tab
                                                 sx={{
                                                     display: "flex",
                                                     flexDirection: "row",
@@ -260,7 +266,7 @@ const ProfilePage = ({user}) => {
                                                 }
                                                 label="Setting"
                                                 {...a11yProps(1)}
-                                            />
+                                            /> */}
                                         </Tabs>
                                     </Box>
                                     <TabPanel
@@ -272,13 +278,13 @@ const ProfilePage = ({user}) => {
                                             handleLogout={handleLogout}
                                         />
                                     </TabPanel>
-                                    <TabPanel
+                                    {/* <TabPanel
                                         value={value}
                                         index={1}
                                         dir={theme.direction}
                                     >
                                         <SettingTab />
-                                    </TabPanel>
+                                    </TabPanel> */}
                                 </MainCard>
                             </ClickAwayListener>
                         </Paper>

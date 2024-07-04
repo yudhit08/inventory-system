@@ -5,11 +5,11 @@ import { useTheme } from '@mui/material/styles';
 import { List, ListItemText, ListItem } from '@mui/material';
 
 // project-imports
-import { DropzopType } from 'config';
-import IconButton from 'components/@extended/IconButton';
+import { DropzopType } from '@/config';
+import IconButton from '@/Components/@extended/IconButton';
 
 // utils
-import getDropzoneData from 'utils/getDropzoneData';
+import getDropzoneData from '@/utils/getDropzoneData';
 
 // assets
 import { CloseCircle, Document } from 'iconsax-react';

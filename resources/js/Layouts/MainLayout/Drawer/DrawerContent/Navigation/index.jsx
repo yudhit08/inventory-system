@@ -6,12 +6,12 @@ import { Box, Typography, useMediaQuery } from "@mui/material";
 
 // project-imports
 import NavGroup from "./NavGroup";
-import menuItem from "../../../../../menu-items";
+import menuItem from "@/menu-items";
 
-import { useSelector } from "../../../../../store";
-import useConfig from "../../../../../hooks/useConfig";
-import { HORIZONTAL_MAX_ITEM } from "../../../../../config";
-import { MenuOrientation } from "../../../../../config";
+import { useSelector } from "@/store";
+import useConfig from "@/hooks/useConfig";
+import { HORIZONTAL_MAX_ITEM } from "@/config";
+import { MenuOrientation } from "@/config";
 
 // ==============================|| DRAWER CONTENT - NAVIGATION ||============================== //
 

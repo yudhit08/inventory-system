@@ -20,7 +20,7 @@ import { MenuOrientation } from '../../config';
 
 // ==============================|| MAIN LAYOUT ||============================== //
 
-const MainLayout = ({children, user}) => {
+const MainLayout = ({children, user, roles}) => {
   const theme = useTheme();
   const downXL = useMediaQuery(theme.breakpoints.down('xl'));
   const downLG = useMediaQuery(theme.breakpoints.down('lg'));
@@ -39,7 +39,7 @@ const MainLayout = ({children, user}) => {
 
   return (
     <Box sx={{ display: 'flex', width: '100%' }}>
-      <Header user={user} />
+      <Header user={user} roles={roles} />
       {!isHorizontal ? <Drawer /> : <HorizontalBar />}
 
       <Box component="main" sx={{ width: `calc(100% - ${DRAWER_WIDTH}px)`, flexGrow: 1, p: { xs: 2, md: 3 } }}>

@@ -7,14 +7,12 @@ import { Provider as ReduxProvider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { createInertiaApp } from "@inertiajs/react";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
-import { BrowserRouter } from "react-router-dom";
 
 import { JWTProvider as AuthProvider } from "./contexts/JWTContext";
 import ThemeCustomization from "./themes";
 import { store, persister } from "./store";
 import { ConfigProvider } from "./contexts/ConfigContext";
 import Locales from "./Components/Locales";
-import { useEffect } from "react";
 
 const appName = import.meta.env.VITE_APP_NAME || "Laravel";
 

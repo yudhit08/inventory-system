@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import { Grid, Rating, Stack, Typography } from '@mui/material';
 
 // project-imports
-import Avatar from 'components/@extended/Avatar';
+import Avatar from '@/Components/@extended/Avatar';
 
-const avatarImage = require.context('assets/images/users', true);
+import avatarImage from '@/assets/images/users/avatar-1.png';
 
 // ==============================|| PRODUCT DETAILS - REVIEW ||============================== //
 

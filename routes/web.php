@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Barang\DaftarBarangController;
+use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RiwayatPengaduanController;
-use App\Http\Controllers\TambahPengaduan;
+use App\Http\Controllers\Pengaduan\RiwayatPengaduanController;
+use App\Http\Controllers\Pengaduan\TambahPengaduan;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -11,13 +12,17 @@ use Inertia\Inertia;
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::redirect('/', "/dashboard");
-    
+
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/pengaduan/riwayat-pengaduan', [RiwayatPengaduanController::class, 'index'])->name('riwayat-pengaduan');
-    Route::get('/pengaduan/buat-pengaduan/layanan', [TambahPengaduan::class, 'layanan'])->name('buat-pengaduan-layanan');
-    Route::get('/pengaduan/buat-pengaduan/barang', [TambahPengaduan::class, 'barang'])->name('buat-pengaduan-barang');
-    Route::post('/pengaduan/buat-pengaduan/barang', [TambahPengaduan::class, 'tambahBarang'])->name('buat-pengaduan-barang');
+    Route::get('/pengaduan/riwayat-pengaduan/details/{id}', [RiwayatPengaduanController::class, 'details'])->name('details-riwayat-pengaduan');
+   
+    Route::get('/pengaduan/buat-pengaduan', [TambahPengaduan::class, 'index'])->name('buat-pengaduan');
+    Route::post('/pengaduan/buat-pengaduan', [TambahPengaduan::class, 'tambahPengaduan'])->name('buat-pengaduan');
+
+    Route::get('/barang/daftar-barang', [DaftarBarangController::class, 'index'])->name('daftar-barang');
+    Route::get('/barang/daftar-barang/details/{id}', [DaftarBarangController::class, 'details'])->name('details-daftar-barang');
 });
 
 Route::middleware('auth')->group(function () {

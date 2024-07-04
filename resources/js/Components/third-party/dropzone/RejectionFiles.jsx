@@ -5,7 +5,7 @@ import { alpha } from '@mui/material/styles';
 import { Box, Paper, Typography } from '@mui/material';
 
 // utils
-import getDropzoneData from 'utils/getDropzoneData';
+import getDropzoneData from '@/utils/getDropzoneData';
 
 // ==============================|| DROPZONE - REJECTION FILES ||============================== //
 

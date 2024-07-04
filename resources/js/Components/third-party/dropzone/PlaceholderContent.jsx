@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import { Typography, Stack, CardMedia } from '@mui/material';
 
 // project-import
-import { DropzopType } from 'config';
+import { DropzopType } from '@/config';
 
 // assets
 import { Camera } from 'iconsax-react';
-import UploadCover from 'assets/images/upload/upload.svg';
+import UploadCover from '@/assets/images/upload/upload.svg';
 
 // ==============================|| UPLOAD - PLACEHOLDER ||============================== //
 
@@ -28,11 +28,11 @@ export default function PlaceholderContent({ type }) {
             <Typography variant="h5">Drag & Drop or Select file</Typography>
 
             <Typography color="secondary">
-              Drop files here or click&nbsp;
+              Pilih&nbsp;
               <Typography component="span" color="primary" sx={{ textDecoration: 'underline' }}>
-                browse
+                foto
               </Typography>
-              &nbsp;thorough your machine
+              &nbsp;barang/layanan yang ingin dilaporkan
             </Typography>
           </Stack>
         </Stack>

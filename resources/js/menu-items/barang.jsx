@@ -25,11 +25,11 @@ const barang = {
   type: 'group',
   children: [
     {
-      id: 'kanban',
+      id: 'daftar-barang',
       title: <FormattedMessage id="daftar-barang" />,
       type: 'item',
       icon: icons.kanban,
-      url: '/barang/kanban/'
+      url: '/barang/daftar-barang'
     },
   ]
 };

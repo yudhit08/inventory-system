@@ -1,5 +1,4 @@
 import {
-    Backdrop,
     Button,
     CardContent,
     Divider,
@@ -17,21 +16,21 @@ import {
 import { useState } from "react";
 import MainCard from "@/Components/MainCard";
 import MainLayout from "@/Layouts/MainLayout";
-import { useForm, usePage } from "@inertiajs/react";
+import { Head, router, useForm } from "@inertiajs/react";
 import axios from "axios";
-import Cookies from "js-cookie";
-
+import MultiFileUpload from "@/Components/third-party/dropzone/MultiFile";
 function BuatPengaduanBarang(props) {
     const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const token = usePage().props;
 
     const { data, setData, post, processing, errors } = useForm({
-        keterangan: "",
         barang: "",
+        keterangan: "",
+        gambar: [],
         layanan: "",
     });
+
+    console.log(data);
 
     const handleChange = (e) => {
         setData(e.target.name, e.target.value);
@@ -39,15 +38,30 @@ function BuatPengaduanBarang(props) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const token = Cookies.get("XSRF-TOKEN")
+        const formData = new FormData();
+        formData.append("barang", data.barang);
+        formData.append("keterangan", data.keterangan);
+        formData.append("layanan", data.layanan);
+        if (data.gambar && data.gambar.length > 0) {
+            data.gambar.forEach((file, index) => {
+                formData.append(`images[${index}]`, file);
+            });
+        }
         axios
-            .post(route("buat-pengaduan-barang"), data, {
+            .post(route("buat-pengaduan"), formData, {
                 headers: {
-                    "X-XSRF-TOKEN": token
-                }
+                    "Content-Type": "multipart/form-data",
+                },
             })
             .then((page) => {
                 console.log(page);
+                setData({
+                    barang: "",
+                    keterangan: "",
+                    gambar: [],
+                    layanan: "",
+                });
+                router.visit(route("riwayat-pengaduan"));
             })
             .catch((err) => {
                 console.error(err);
@@ -55,12 +69,17 @@ function BuatPengaduanBarang(props) {
     };
 
     return (
-        <MainLayout>
-            <form noValidate onSubmit={handleSubmit}>
+        <MainLayout user={props?.auth.user} roles={props?.auth.roles}>
+            <Head title="Buat Pengaduan" />
+            <form
+                noValidate
+                onSubmit={handleSubmit}
+                encType="multipart/form-data"
+            >
                 <Grid container spacing={3}>
                     <Grid item xs={12}>
                         <MainCard title="">
-                            <Grid container spacing={2} alignItems="center">
+                            <Grid container spacing={2}>
                                 <Grid item xs={12} lg={6}>
                                     <Stack spacing={1}>
                                         <InputLabel>Jenis Layanan</InputLabel>
@@ -115,12 +134,32 @@ function BuatPengaduanBarang(props) {
                                     </Stack>
                                 </Grid>
 
-                                <Grid item xs={12} lg={6}>
+                                <Grid item xs={12}>
+                                    <Stack spacing={1.25}>
+                                        <InputLabel htmlFor="cal-start-date">
+                                            Foto Barang
+                                        </InputLabel>
+                                        <MultiFileUpload
+                                            setFieldValue={setData}
+                                            files={data.gambar}
+                                            error={!!errors.gambar}
+                                        />
+                                        {errors.gambar && (
+                                            <FormHelperText error={true}>
+                                                {errors.gambar}
+                                            </FormHelperText>
+                                        )}
+                                    </Stack>
+                                </Grid>
+
+                                <Grid item xs={12}>
                                     <Stack spacing={1}>
                                         <InputLabel>Keterangan</InputLabel>
                                         <TextField
                                             fullWidth
-                                            placeholder="Enter keterangan"
+                                            multiline
+                                            rows={5}
+                                            placeholder="Isi keterangan"
                                             value={data.keterangan}
                                             name="keterangan"
                                             onChange={handleChange}

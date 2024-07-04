@@ -15,11 +15,11 @@ import {
 } from "@mui/material";
 
 // project-imports
-import Dot from "../../../../../Components/@extended/Dot";
-import useConfig from "../../../../../hooks/useConfig";
-import { dispatch, useSelector } from "../../../../../store";
-import { activeItem, openDrawer } from "../../../../../store/reducers/menu";
-import { MenuOrientation, ThemeMode } from "../../../../../config";
+import Dot from "@/Components/@extended/Dot";
+import useConfig from "@/hooks/useConfig";
+import { dispatch, useSelector } from "@/store";
+import { activeItem, openDrawer } from "@/store/reducers/menu";
+import { MenuOrientation, ThemeMode } from "@/config";
 
 // ==============================|| NAVIGATION - ITEM ||============================== //
 

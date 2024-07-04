@@ -73,7 +73,7 @@ export default slice.reducer;
 export function getProducts() {
   return async () => {
     try {
-      const response = await axios.get('/api/products/list');
+      const response = await axios.get(route);
       dispatch(slice.actions.getProductsSuccess(response.data.products));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
@@ -84,7 +84,7 @@ export function getProducts() {
 export function filterProducts(filter) {
   return async () => {
     try {
-      const response = await axios.post('/api/products/filter', { filter });
+      const response = await axios.post('/api/barang/filter', { filter });
       dispatch(slice.actions.filterProductsSuccess(response.data));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
@@ -95,7 +95,7 @@ export function filterProducts(filter) {
 export function getProduct(id) {
   return async () => {
     try {
-      const response = await axios.post('/api/product/details', { id });
+      const response = await axios.get('/api/barang/daftar-barang');
       dispatch(slice.actions.getProductSuccess(response.data));
     } catch (error) {
       dispatch(slice.actions.hasError(error));

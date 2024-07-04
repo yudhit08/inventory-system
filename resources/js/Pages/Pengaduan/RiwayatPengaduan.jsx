@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Link } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 import moment from "moment";
 
 // material-ui
@@ -16,6 +16,7 @@ import {
     TableContainer,
     TableHead,
     TableRow,
+    Tooltip,
     Typography,
 } from "@mui/material";
 
@@ -44,7 +45,7 @@ import {
     renderFilterTypes,
     DateColumnFilter,
 } from "@/utils/react-table";
-import { DocumentDownload, Edit } from "iconsax-react";
+import { DocumentDownload, Edit, Eye } from "iconsax-react";
 import axios from "axios";
 import { exportToPdf } from "@/utils/exportToPdf";
 import MainLayout from "@/Layouts/MainLayout";
@@ -106,7 +107,7 @@ function ReactTable({ columns, data }) {
                         data={rows.map((d) => d.original)}
                         filename={"payroll.csv"}
                     />
-                    <Link href={"/pengaduan/buat-pengaduan/layanan"}>
+                    <Link href={"/pengaduan/buat-pengaduan"}>
                         <Button variant="contained">Buat Pengaduan</Button>
                     </Link>
                 </Stack>
@@ -207,38 +208,25 @@ const RiwayatPengaduan = (props) => {
     const [downloadValue, setDownloadValue] = useState({});
     const downloadRef = useRef(null);
 
-    console.log(props)
+    console.log(props);
 
-    // useEffect(() => {
-    //     const token =
-    //         localStorage.getItem("serviceToken") ||
-    //         sessionStorage.getItem("serviceToken");
-    //     axios
-    //         .get(`${process.env.REACT_APP_API_URL}/api/keuangan/payroll`, {
-    //             headers: {
-    //                 "x-access-token": token,
-    //             },
-    //         })
-    //         .then((res) => {
-    //             // Add serial number and format date
-    //             const formattedData = res.data.map((item, index) => ({
-    //                 ...item,
-    //                 no: index + 1,
-    //                 tanggal_payroll_terbit: moment(
-    //                     item.tanggal_payroll_terbit
-    //                 ).format("DD MMMM YYYY"),
-    //             }));
-    //             setDataTable(formattedData);
-    //         })
-    //         .catch((err) => {
-    //             console.log(err);
-    //         });
-    // }, []);
+    useEffect(() => {
+        // Add serial number and format date
+        const formattedData = props.riwayatPengaduan.map((item, index) => ({
+            ...item,
+            no: index + 1,
+            barang: item.barang.merk,
+            pelapor: item.user_pelapor.name,
+            jenis_layanan: item.jenis_layanan.jenis_layanan,
+            created_at: moment(item.created_at).format("DD MMMM YYYY"),
+        }));
+        setDataTable(formattedData);
+    }, [props]);
 
     const handleDownload = (value) => {
         setDownloadValue(value);
         setTimeout(() => {
-            exportToPdf(downloadRef.current, "payroll_" + value.nama);
+            exportToPdf(downloadRef.current, "riwayat_pengaduan_" + value.nama);
         }, 500);
     };
 
@@ -251,7 +239,7 @@ const RiwayatPengaduan = (props) => {
             },
             {
                 Header: "Jenis Layanan",
-                accessor: "layanan_id",
+                accessor: "jenis_layanan",
             },
             {
                 Header: "Nama Barang",
@@ -282,13 +270,16 @@ const RiwayatPengaduan = (props) => {
                 Filter: false,
                 Cell: ({ row }) => {
                     return (
-                        <IconButton
-                            sx={{ width: "fit-content" }}
-                            color="primary"
-                            onClick={() => handleDownload(row.original)}
-                        >
-                            <DocumentDownload size={15} />
-                        </IconButton>
+                        <Tooltip title="Details">
+                            <Link href={`/pengaduan/riwayat-pengaduan/details/${row.original.id}`}>
+                                <IconButton
+                                    sx={{ width: "fit-content" }}
+                                    color="primary"
+                                >
+                                    <Eye size={15} />
+                                </IconButton>
+                            </Link>
+                        </Tooltip>
                     );
                 },
             },
@@ -297,7 +288,8 @@ const RiwayatPengaduan = (props) => {
     );
 
     return (
-        <MainLayout>
+        <MainLayout user={props?.auth.user} roles={props?.auth.roles}>
+            <Head title="Riwayat Pengaduan" />
             <MainCard content={false}>
                 <ScrollX>
                     <ReactTable columns={columns} data={dataTable} />
