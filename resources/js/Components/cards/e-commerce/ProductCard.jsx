@@ -102,7 +102,7 @@ const ProductCard = ({
                         height: 250,
                         textDecoration: "none",
                     }}
-                    image={image}
+                    image={`/storage/${image}`}
                     component={Link}
                     href={`/barang/daftar-barang/details/${id}`}
                 />
@@ -206,6 +206,8 @@ const ProductCard = ({
                                 variant="contained"
                                 onClick={addCart}
                                 fullWidth
+                                LinkComponent={Link}
+                                href={`/barang/daftar-barang/details/${id}`}
                             >
                                Lihat Detail
                             </Button>

@@ -264,7 +264,7 @@ const ProfilePage = ({ user, roles }) => {
                                                         }}
                                                     />
                                                 }
-                                                label="Setting"
+                                                label="Roles"
                                                 {...a11yProps(1)}
                                             /> */}
                                         </Tabs>
@@ -278,13 +278,13 @@ const ProfilePage = ({ user, roles }) => {
                                             handleLogout={handleLogout}
                                         />
                                     </TabPanel>
-                                    {/* <TabPanel
-                                        value={value}
-                                        index={1}
-                                        dir={theme.direction}
-                                    >
-                                        <SettingTab />
-                                    </TabPanel> */}
+                                        {/* <TabPanel
+                                            value={value}
+                                            index={1}
+                                            dir={theme.direction}
+                                        >
+                                            <SettingTab roles={roles} />
+                                        </TabPanel> */}
                                 </MainCard>
                             </ClickAwayListener>
                         </Paper>

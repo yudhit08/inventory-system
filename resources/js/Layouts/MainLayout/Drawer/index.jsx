@@ -16,7 +16,7 @@ import { openDrawer } from '../../../store/reducers/menu';
 
 // ==============================|| MAIN LAYOUT - DRAWER ||============================== //
 
-const MainDrawer = ({ window }) => {
+const MainDrawer = ({ window, roles }) => {
   const theme = useTheme();
   const downLG = useMediaQuery(theme.breakpoints.down('lg'));
 
@@ -26,7 +26,7 @@ const MainDrawer = ({ window }) => {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   // header content
-  const drawerContent = useMemo(() => <DrawerContent />, []);
+  const drawerContent = useMemo(() => <DrawerContent roles={roles}  />, []);
   const drawerHeader = useMemo(() => <DrawerHeader open={drawerOpen} />, [drawerOpen]);
 
   return (

@@ -20,7 +20,7 @@ class TambahPengaduan extends Controller
     {
         $layanan = JenisLayanan::all();
         $barang = Barang::where('user_id', Auth::user()->id)->get();
-        return Inertia::render('Pengaduan/Form/BuatPengaduan', [
+        return Inertia::render('User/Pengaduan/Form/BuatPengaduan', [
             "layanan" => $layanan,
             "barang" => $barang
         ]);
@@ -50,6 +50,30 @@ class TambahPengaduan extends Controller
         return response()->json([
             'success' => [
                 'message' => 'Pengaduan berhasil ditambah',
+            ],
+        ], 200);
+    }
+
+    public function assignPetugas(Request $request)
+    {
+        // Validate the request
+        $request->validate([
+            'pengaduan_id' => 'required|exists:pengaduans,id',
+            'petugas_layanan_id' => 'required|exists:users,id'
+        ]);
+
+        // Find the relevant Pengaduan record
+        $pengaduan = Pengaduan::findOrFail($request->pengaduan_id);
+
+        // Assign the petugas_layanan_id
+        $pengaduan->petugas_user_id = $request->petugas_layanan_id;
+
+        // Save the changes
+        $pengaduan->save();
+
+        return response()->json([
+            'success' => [
+                'message' => 'Assign ke petugas berhasil',
             ],
         ], 200);
     }

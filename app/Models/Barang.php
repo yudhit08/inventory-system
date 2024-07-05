@@ -30,7 +30,7 @@ class Barang extends Model
 
     public function pengaduans(): HasMany
     {
-        return $this->hasMany(Pengaduan::class, 'barang_id', 'no_bmn');
+        return $this->hasMany(Pengaduan::class, 'barang_id', 'id');
     }
 
     public function ruangan(): BelongsTo
@@ -45,6 +45,6 @@ class Barang extends Model
 
     public function gambar(): HasMany
     {
-        return $this->hasMany(GambarBarang::class, 'barang_id', 'no_bmn');
+        return $this->hasMany(GambarBarang::class, 'barang_id', 'id');
     }
 }

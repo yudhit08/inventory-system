@@ -14,19 +14,37 @@ class BidangSeeder extends Seeder
      */
     public function run(): void
     {
-        // Seed Bidangs
-        Bidang::create([
-            'id' => Str::uuid(),
-            'nama_bidang' => 'Bidang A',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        $bidang = [
+            [
+                "nama_bidang" => "Bagian Umum",
+            ],
+            [
+                "nama_bidang" => "Fungsi Statistik Sosial",
+            ],
+            [
+                "nama_bidang" => "Fungsi Statistik Produksi",
+            ],
+            [
+                "nama_bidang" => "Fungsi Statistik Distribusi",
+            ],
+            [
+                "nama_bidang" => "Fungsi Nerwilis",
+            ],
+            [
+                "nama_bidang" => "Fungsi IPDS",
+            ],
+            [
+                "nama_bidang" => "Pimpinan",
+            ],
+        ];
 
-        Bidang::create([
-            'id' => Str::uuid(),
-            'nama_bidang' => 'Bidang B',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        foreach ($bidang as $nama_bidang) {
+            Bidang::create([
+                'id' => Str::uuid(),
+                'nama_bidang' => $nama_bidang['nama_bidang'],
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
 }

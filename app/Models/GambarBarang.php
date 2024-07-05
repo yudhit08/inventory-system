@@ -13,6 +13,11 @@ class GambarBarang extends Model
 
     public $incrementing = false;
 
+    protected $fillable = [
+        'barang_id',
+        'path'
+    ];
+
     protected static function boot()
     {
         parent::boot();
@@ -24,7 +29,7 @@ class GambarBarang extends Model
 
     public function barang(): BelongsTo
     {
-        return $this->belongsTo(Barang::class, 'barang_id', 'no_bmn');
+        return $this->belongsTo(Barang::class, 'barang_id', 'id');
     }
 
 }

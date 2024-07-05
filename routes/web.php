@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Barang\DaftarBarangController;
+use App\Http\Controllers\Barang\TambahBarangController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\HandleRolesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Pengaduan\RiwayatPengaduanController;
 use App\Http\Controllers\Pengaduan\TambahPengaduan;
@@ -23,20 +25,26 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/barang/daftar-barang', [DaftarBarangController::class, 'index'])->name('daftar-barang');
     Route::get('/barang/daftar-barang/details/{id}', [DaftarBarangController::class, 'details'])->name('details-daftar-barang');
-});
+    
+    Route::get('/admin/dashboard', [DashboardController::class, 'adminView'])->name('dashboard-admin');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profiles/user/personal', function () {
-        return Inertia::render('Profiles/TabPersonal');
-    })->name('profile.edit');
-    Route::get('/profiles/user/password', function () {
-        return Inertia::render('Profiles/TabPassword');
-    })->name('profile.edit');
-    Route::get('/profiles/user/settings', function () {
-        return Inertia::render('Profiles/TabSettings');
-    })->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/admin/barang/tambah-barang', [TambahBarangController::class, 'index'])->name('tambah-barang-view');
+    Route::post('/admin/barang/tambah-barang', [TambahBarangController::class, 'tambahBarang'])->name('tambah-barang');
+   
+    Route::get('/admin/barang/daftar-barang', [DaftarBarangController::class, 'daftarBarangAdmin'])->name('daftar-barang-admin');
+    Route::get('/admin/barang/daftar-barang/details/{id}', [DaftarBarangController::class, 'detailsBarangAdmin'])->name('details-daftar-barang');
+
+    Route::get('/admin/pengaduan/daftar-pengaduan', [RiwayatPengaduanController::class, 'adminView'])->name('daftar-pengaduan');
+    Route::get('/admin/pengaduan/daftar-pengaduan/details/{id}', [RiwayatPengaduanController::class, 'detailsAdmin'])->name('details-daftar-pengaduan');
+    Route::post('/admin/pengaduan/assign-petugas', [TambahPengaduan::class, 'assignPetugas'])->name('assign-petugas');
+   
+    Route::get('/admin/pengaduan/buat-pengaduan', [TambahPengaduan::class, 'index'])->name('buat-pengaduan');
+    Route::post('/admin/pengaduan/buat-pengaduan', [TambahPengaduan::class, 'tambahPengaduan'])->name('buat-pengaduan');
+
+    Route::get('/petugas/dashboard', [DashboardController::class, 'petugasView'])->name('dashboard-petugas');
+
+    Route::get('/petugas/pengaduan/daftar-pengaduan', [RiwayatPengaduanController::class, 'petugasView'])->name('daftar-pengaduan-petugas');
+    Route::get('/petugas/pengaduan/daftar-pengaduan/details/{id}', [RiwayatPengaduanController::class, 'detailsPetugas'])->name('details-daftar-pengaduan-petugas');
 });
 
 require __DIR__ . '/auth.php';

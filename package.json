@@ -9,6 +9,7 @@
         "@headlessui/react": "^1.4.2",
         "@inertiajs/react": "^1.0.0",
         "@tailwindcss/forms": "^0.5.3",
+        "@types/react-slick": "^0.23.13",
         "@vitejs/plugin-react": "^4.2.0",
         "autoprefixer": "^10.4.12",
         "axios": "^1.7.2",
@@ -54,6 +55,7 @@
         "react-zoom-pan-pinch": "^3.6.1",
         "redux-persist": "^6.0.0",
         "simplebar-react": "^3.2.6",
+        "swiper": "^11.1.4",
         "yup": "^1.4.0"
     }
 }

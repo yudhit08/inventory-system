@@ -33,7 +33,7 @@ function ElevationScroll({ children, window }) {
 
 // ==============================|| HORIZONTAL MENU ||============================== //
 
-const CustomAppBar = () => {
+const CustomAppBar = ({roles}) => {
   const theme = useTheme();
   const { container } = useConfig();
 
@@ -54,7 +54,7 @@ const CustomAppBar = () => {
       >
         <Container maxWidth={container ? 'xl' : false}>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Navigation />
+            <Navigation roles={roles} />
           </Box>
         </Container>
       </AppBar>

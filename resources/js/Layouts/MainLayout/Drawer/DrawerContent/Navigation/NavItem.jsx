@@ -61,7 +61,6 @@ const NavItem = ({ item, level }) => {
 
     // active menu item on page load
     useEffect(() => {
-        console.log(item.url)
         if (pathname && pathname.includes("product-details")) {
             if (item.url && item.url.includes("product-details")) {
                 dispatch(activeItem({ openItem: [item.id] }));

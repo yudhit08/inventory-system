@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Role;
 use App\Models\Roles;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -15,22 +14,30 @@ class RoleUserSeeder extends Seeder
      */
     public function run()
     {
-        // Get all users and roles
-        $users = User::all();
+        // Get all roles
         $roles = Roles::all();
+
+        // Get users
+        $users = User::all();
 
         // Define an array to store role_user relationships
         $roleUser = [];
 
-        // Iterate through each user and assign random roles
-        foreach ($users as $user) {
-            // Generate a random number of roles (between 1 and 3)
-            $numRoles = rand(1, 3);
+        // Ensure each of the first 4 users gets one distinct role
+        foreach ($roles as $index => $role) {
+            $user = $users[$index];
+            $roleUser[] = [
+                'user_id' => $user->id,
+                'role_id' => $role->id,
+            ];
+        }
 
-            // Shuffle the roles and take the first $numRoles roles
-            $selectedRoles = $roles->shuffle()->take($numRoles);
+        // Get the remaining users (those that should have 2 roles each)
+        $usersWithTwoRoles = $users->skip(4)->take(3);
 
-            // Build the role_user entries
+        // Assign 2 roles to each of these users
+        foreach ($usersWithTwoRoles as $user) {
+            $selectedRoles = $roles->random(2);
             foreach ($selectedRoles as $role) {
                 $roleUser[] = [
                     'user_id' => $user->id,

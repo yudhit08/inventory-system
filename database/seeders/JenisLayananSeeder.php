@@ -17,14 +17,14 @@ class JenisLayananSeeder extends Seeder
         // Seed JenisLayanans
         DB::table('jenis_layanans')->insert([
             'id' => Str::uuid(),
-            'jenis_layanan' => 'Perbaikan',
+            'jenis_layanan' => 'Barang TI',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
         DB::table('jenis_layanans')->insert([
             'id' => Str::uuid(),
-            'jenis_layanan' => 'Pemeliharaan',
+            'jenis_layanan' => 'Layanan TI',
             'created_at' => now(),
             'updated_at' => now(),
         ]);

@@ -215,9 +215,9 @@ const ProductSpecification = ({product}) => {
         const formattedData = product.pengaduans?.map((item, index) => ({
             ...item,
             no: index + 1,
-            barang: item.barang.merk,
+            barang: item.merk,
             pelapor: item.user_pelapor.name,
-            jenis_layanan: item.jenis_layanan.jenis_layanan,
+            // jenis_layanan: item.jenis_layanan.jenis_layanan,
             created_at: moment(item.created_at).format("DD MMMM YYYY"),
         }));
         setDataTable(formattedData);
